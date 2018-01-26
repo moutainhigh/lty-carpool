@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.common.constant;
+package com.lantaiyuan.carpool.common;
 
 import lombok.Getter;
 

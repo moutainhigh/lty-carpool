@@ -1,6 +1,6 @@
 package com.lantaiyuan.carpool.order.controller;
 
-import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
 import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
 import com.lantaiyuan.carpool.order.service.ICancelService;

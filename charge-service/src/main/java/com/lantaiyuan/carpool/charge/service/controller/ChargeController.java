@@ -2,7 +2,7 @@ package com.lantaiyuan.carpool.charge.service.controller;
 
 import com.lantaiyuan.carpool.charge.domain.request.ChargeRequest;
 import com.lantaiyuan.carpool.charge.service.IChargeService;
-import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
