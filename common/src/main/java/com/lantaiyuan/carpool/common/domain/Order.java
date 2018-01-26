@@ -20,40 +20,40 @@ import java.io.Serializable;
 public class Order implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long orderId;
-    String cityCode;
-    String userId;
-    String phoneNumber;
-    String startName;
-    Double startLongitude;
-    Double startLatitude;
-    String endName;
-    Double endLongitude;
-    Double endLatitude;
-    Integer number;
-    Integer maxWalkDistance;
-    String earliestStartTime;
-    String latestStartTime;
+    private Long orderId;
+    private String cityCode;
+    private String userId;
+    private String phoneNumber;
+    private String startName;
+    private Double startLongitude;
+    private Double startLatitude;
+    private String endName;
+    private Double endLongitude;
+    private Double endLatitude;
+    private Integer number;
+    private Integer maxWalkDistance;
+    private String earliestStartTime;
+    private String latestStartTime;
     /**
      * 订单联系人号码
      */
-    String orderPhoneNumber;
+    private String orderPhoneNumber;
     /**
      * 发起订单位置
      */
-    String orderPlaceName;
+    private String orderPlaceName;
     /**
      * 事件时间
      */
-    Long eventTime;
+    private Long eventTime;
     /**
      * 用户状态
      */
-    Integer userStatus;
+    private Integer userStatus;
     /**
      * 线路id
      */
-    Long lineId;
+    private Long lineId;
 
     public Order() {
 

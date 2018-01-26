@@ -1,9 +1,9 @@
-package com.lantaiyuan.carpool.match.controller;
+package com.lantaiyuan.carpool.websocket.controller;
 
-import com.lantaiyuan.carpool.match.service.IMatchService;
+import com.lantaiyuan.carpool.websocket.service.IWebSocketService;
 import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.match.domain.MatchRequest;
+import com.lantaiyuan.carpool.websocket.domain.WebSocketRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,14 +21,14 @@ import org.springframework.stereotype.Controller;
 @Controller
 @EnableScheduling
 @Slf4j
-public class MatchController {
+public class WebSocketController {
     @Autowired
-    private IMatchService matchService;
+    private IWebSocketService webSocketService;
 
     @MessageMapping(value="/match")
     @SendTo("/topic/track")
-    public ResultObject match(MatchRequest matchRequest) throws Exception {
-        matchService.getMatch(matchRequest);
+    public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
+        webSocketService.getMatch(webSocketRequest);
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),0);
     }
     @SendTo("/topic/track")

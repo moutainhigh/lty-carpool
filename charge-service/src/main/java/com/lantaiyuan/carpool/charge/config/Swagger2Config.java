@@ -23,7 +23,7 @@ public class Swagger2Config {
     public Docket createRestApi()
     {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("loginAPI")
+                .groupName("charge")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lantaiyuan"))
@@ -33,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("订单相关的RESTful APIs")
-                .description("订单相关的RESTful API")
+                .title("charge APIs")
+                .description("charge API")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

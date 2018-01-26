@@ -13,10 +13,10 @@ import java.io.Serializable;
  */
 @Data
 public class LoginRequest implements Validate,Serializable {
-    String userId;
-    Long eventTime;
-    Double longitude;
-    Double latitude;
+    private String userId;
+    private Long eventTime;
+    private Double longitude;
+    private Double latitude;
 
     @Override
     public Boolean validate() {

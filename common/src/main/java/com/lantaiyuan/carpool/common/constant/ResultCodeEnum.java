@@ -1,5 +1,7 @@
 package com.lantaiyuan.carpool.common.constant;
 
+import lombok.Getter;
+
 /**
  * @author: Administrator$
  * @project: lty-carpool$
@@ -8,13 +10,11 @@ package com.lantaiyuan.carpool.common.constant;
  */
 public enum ResultCodeEnum {
     SUCCESS(001);
-    Integer value;
+    @Getter
+    private Integer value;
 
     ResultCodeEnum(Integer value) {
         this.value = value;
     }
 
-    public Integer getValue() {
-        return value;
-    }
-    }
+}

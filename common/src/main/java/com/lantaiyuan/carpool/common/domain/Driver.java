@@ -20,10 +20,10 @@ import java.io.Serializable;
 public class Driver implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    String driverId;
-    String driverName;
-    Integer driverJudgement;
-    String driverPhoneNo;
+    private String driverId;
+    private String driverName;
+    private Integer driverJudgement;
+    private String driverPhoneNo;
 
     public Driver() {
     }

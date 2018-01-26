@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.match.domain;
+package com.lantaiyuan.carpool.websocket.domain;
 import com.lantaiyuan.carpool.common.Validate;
 import com.lantaiyuan.carpool.common.domain.Line;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @description:
  */
 @Data
-public class MatchResponse implements Validate,Serializable {
+public class WebSocketResponse implements Validate,Serializable {
     int status;
     Order order;
     Line line;

@@ -33,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("订单相关的RESTful APIs")
-                .description("订单相关的RESTful API")
+                .title("login APIs")
+                .description("login API")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

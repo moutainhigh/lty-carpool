@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.match.domain;
+package com.lantaiyuan.carpool.websocket.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @date: 2018/1/16$ 10:05$
  * @description:
  */
-public class MatchRequest implements Validate,Serializable {
+public class WebSocketRequest implements Validate,Serializable {
     String userId;
     long eventTime;
 

@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.match.config;
+package com.lantaiyuan.carpool.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class Swagger2Config {
     public Docket createRestApi()
     {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("match")
+                .groupName("common")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lantaiyuan"))
@@ -33,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("match APIs")
-                .description("match API")
+                .title("common APIs")
+                .description("common API")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

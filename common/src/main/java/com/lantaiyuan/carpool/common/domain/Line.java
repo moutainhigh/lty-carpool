@@ -20,17 +20,17 @@ import java.io.Serializable;
 public class Line implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    Long lineId;
-    String cityCode;
-    String userId;
-    Integer lineStatus;
-    Integer lineExpectTime;
-    String location;
-    Integer linePersons;
-    Integer requiredPersons;
-    Integer departTime;
-    String driverId;
-    String busId;
+    private Long lineId;
+    private String cityCode;
+    private String userId;
+    private Integer lineStatus;
+    private Integer lineExpectTime;
+    private String location;
+    private Integer linePersons;
+    private Integer requiredPersons;
+    private Integer departTime;
+    private String driverId;
+    private String busId;
 
     public Line() {
     }

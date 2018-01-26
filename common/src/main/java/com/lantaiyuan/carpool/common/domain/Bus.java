@@ -21,9 +21,9 @@ public class Bus  implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private String busId;
-    Integer departBusType;
-    Integer departBusSeats;
-    String busPlateNumber;
+    private Integer departBusType;
+    private Integer departBusSeats;
+    private String busPlateNumber;
     public Bus() {
     }
 
