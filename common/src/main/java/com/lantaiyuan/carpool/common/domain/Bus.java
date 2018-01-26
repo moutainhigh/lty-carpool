@@ -3,10 +3,7 @@ package com.lantaiyuan.carpool.common.domain;
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -20,6 +17,7 @@ import java.io.Serializable;
 public class Bus  implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="bus_id")
     private String busId;
     private Integer departBusType;
     private Integer departBusSeats;

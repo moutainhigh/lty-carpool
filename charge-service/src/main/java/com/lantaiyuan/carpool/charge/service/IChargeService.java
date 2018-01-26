@@ -9,5 +9,10 @@ import com.lantaiyuan.carpool.charge.domain.request.ChargeRequest;
  * @description:
  */
 public interface IChargeService {
+    /**
+     * 计费
+     * @param chargeRequest
+     * @return
+     */
     Double charge(ChargeRequest chargeRequest);
 }

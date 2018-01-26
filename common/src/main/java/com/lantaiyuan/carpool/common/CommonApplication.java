@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description:
  */
 @SpringBootApplication
-@EnableDubboConfiguration
 @Slf4j
 public class CommonApplication {
     public static void main(String[] args) {
