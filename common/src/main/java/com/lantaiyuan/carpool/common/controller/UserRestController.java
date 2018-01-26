@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.common.test;
+package com.lantaiyuan.carpool.common.controller;
 
 
 import com.lantaiyuan.carpool.common.dao.UserRepository;
@@ -7,6 +7,7 @@ import com.lantaiyuan.carpool.common.ResultObject;
 import com.lantaiyuan.carpool.common.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
  * @description:
  */
 @Api(value = "user", description = "用户信息")
+@Slf4j
 @RestController
 public class UserRestController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserRestController.class);
     @Autowired
     private UserRepository userRepository;
 
