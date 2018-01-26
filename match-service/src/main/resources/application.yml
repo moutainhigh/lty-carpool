@@ -1,0 +1,13 @@
+server:
+  port: 8088
+## 数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://10.1.254.12:3306/carpool?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root123456
+    driver-class-name: com.mysql.jdbc.Driver
+## Redis 配置
+  redis:
+    cluster:
+      nodes: 192.168.2.245:7000,192.168.2.245:7001,192.168.2.246:7002,192.168.2.246:7003,192.168.2.247:7004,192.168.2.247:7005,192.168.2.248:7006,192.168.2.248:7007,192.168.2.249:7008,192.168.2.249:7009
