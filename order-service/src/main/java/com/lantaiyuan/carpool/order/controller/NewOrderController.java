@@ -26,6 +26,9 @@ public class NewOrderController {
 
     @RequestMapping(value = "/order/newOrder", method = RequestMethod.POST)
     public ResultObject newOrder(@RequestBody NewOrderRequest newOrderRequest) {
+        if(!newOrderRequest.validate()){
+            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
+        }
         int r = newOrderService.newOrder(newOrderRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);
         return ret;

@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.charge.service.controller;
+package com.lantaiyuan.carpool.charge.controller;
 
 import com.lantaiyuan.carpool.charge.domain.request.ChargeRequest;
 import com.lantaiyuan.carpool.charge.service.IChargeService;
@@ -24,6 +24,9 @@ public class ChargeController {
     private IChargeService chargeService;
     @RequestMapping(value = "/order/add2Route", method = RequestMethod.POST)
     public ResultObject charge(@RequestBody ChargeRequest chargeRequest) {
+        if(!chargeRequest.validate()){
+            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
+        }
         double r = chargeService.charge(chargeRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);
         return ret;

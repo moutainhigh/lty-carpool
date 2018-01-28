@@ -9,7 +9,7 @@ import lombok.Getter;
  * @description:
  */
 public enum ResultCodeEnum {
-    SUCCESS(001);
+    SUCCESS(001),INVALIDATE(002);
     @Getter
     private Integer value;
 

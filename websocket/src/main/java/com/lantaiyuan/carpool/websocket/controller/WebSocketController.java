@@ -28,12 +28,10 @@ public class WebSocketController {
     @MessageMapping(value="/match")
     @SendTo("/topic/track")
     public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
+        if(!webSocketRequest.validate()){
+            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
+        }
         webSocketService.getMatch(webSocketRequest);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),0);
-    }
-    @SendTo("/topic/track")
-    @Scheduled(fixedRate = 1000)
-    public ResultObject match() throws Exception {
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),0);
     }
 }

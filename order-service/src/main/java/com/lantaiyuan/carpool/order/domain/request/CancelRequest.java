@@ -21,6 +21,6 @@ public class CancelRequest implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }
