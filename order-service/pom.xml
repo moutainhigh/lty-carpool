@@ -32,6 +32,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-binder-kafka</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.robert.vesta</groupId>
+            <artifactId>vesta-service</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
