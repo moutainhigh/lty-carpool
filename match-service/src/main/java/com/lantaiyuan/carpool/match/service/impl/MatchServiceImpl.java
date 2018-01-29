@@ -12,6 +12,7 @@ public class MatchServiceImpl implements IMatchService {
     @Override
     @StreamListener(SubscribeChannel.SUBSCRIBE)
     public void match(String msg) {
-
+        log.info(msg);
+        System.out.println(msg);
     }
 }
