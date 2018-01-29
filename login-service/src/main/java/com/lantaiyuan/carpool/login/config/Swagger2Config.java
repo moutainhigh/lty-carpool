@@ -1,4 +1,4 @@
-package login.config;
+package com.lantaiyuan.carpool.login.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

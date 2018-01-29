@@ -1,7 +1,7 @@
-package login.service;
+package com.lantaiyuan.carpool.login.service;
 
-import login.domain.request.LoginRequest;
-import login.domain.response.LoginResponse;
+import com.lantaiyuan.carpool.login.domain.request.LoginRequest;
+import com.lantaiyuan.carpool.login.domain.response.LoginResponse;
 
 /**
  * @author: Administrator$

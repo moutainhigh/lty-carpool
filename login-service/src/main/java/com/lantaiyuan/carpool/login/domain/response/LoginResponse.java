@@ -1,4 +1,4 @@
-package login.domain.response;
+package com.lantaiyuan.carpool.login.domain.response;
 
 
 import com.lantaiyuan.carpool.common.Validate;
