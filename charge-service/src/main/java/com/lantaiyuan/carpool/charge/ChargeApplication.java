@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
  * @date: 2017/12/27$ 14:03$
  * @description:计费
  */
-@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain","com.lantaiyuan.carpool.charge"})
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.charge"})
 @Slf4j
 public class ChargeApplication {
     public static void main(String[] args) {

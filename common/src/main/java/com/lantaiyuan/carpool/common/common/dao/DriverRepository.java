@@ -1,6 +1,6 @@
-package com.lantaiyuan.carpool.common.dao.repository;
+package com.lantaiyuan.carpool.common.common.dao;
 
-import com.lantaiyuan.carpool.common.domain.entity.Driver;
+import com.lantaiyuan.carpool.common.common.domain.Driver;
 import org.springframework.data.repository.CrudRepository;
 
 /**

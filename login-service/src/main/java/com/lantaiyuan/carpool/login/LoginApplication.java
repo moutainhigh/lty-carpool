@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
  * @date: 2017/12/27$ 14:03$
  * @description:用户进入
  */
-@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain","com.lantaiyuan.carpool.login"})
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.login"})
 @Slf4j
 public class LoginApplication {
     public static void main(String[] args) {

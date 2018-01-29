@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date: 2018/1/10$ 11:47$
  * @description:
  */
-@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain","com.lantaiyuan.carpool.match"})
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.match"})
 @Slf4j
 @EnableBinding({
         SubscribeChannel.class

@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.common.domain.entity;
+package com.lantaiyuan.carpool.common.common.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
