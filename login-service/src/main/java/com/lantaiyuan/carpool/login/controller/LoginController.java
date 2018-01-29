@@ -20,13 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2018/1/8$ 9:52$
  * @description:
  */
-@Api(value = "bus", description = "登录信息")
 @RestController
 @Slf4j
 public class LoginController {
     @Autowired
     private ILoginService loginService;
-    @ApiOperation(value="登录信息",produces = "application/json")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResultObject login(@RequestBody LoginRequest loginRequest) {
         LoginResponse loginResponse = loginService.getUserStatusOrRecommend(loginRequest);

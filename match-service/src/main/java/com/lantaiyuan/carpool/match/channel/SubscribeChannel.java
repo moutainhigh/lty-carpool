@@ -6,7 +6,6 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableBinding
 public interface SubscribeChannel {
     String SUBSCRIBE = "subscribe";
 

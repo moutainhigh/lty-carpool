@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 public class NewOrderController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NewOrderController.class);
     @Autowired
     private INewOrderService newOrderService;
 

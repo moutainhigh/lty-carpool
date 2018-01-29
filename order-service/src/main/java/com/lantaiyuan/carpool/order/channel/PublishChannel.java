@@ -7,7 +7,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableBinding
 public interface PublishChannel {
     String PUBLISH = "publish";
 
