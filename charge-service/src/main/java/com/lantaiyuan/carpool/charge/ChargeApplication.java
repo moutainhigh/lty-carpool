@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
  * @author: Administrator$
  * @project: lty-carpool$
  * @date: 2017/12/27$ 14:03$
- * @description:用户进入
+ * @description:计费
  */
 @SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain","com.lantaiyuan.carpool.charge"})
 @Slf4j

@@ -1,10 +1,10 @@
 package com.lantaiyuan.carpool.common.controller;
 
 
-import com.lantaiyuan.carpool.common.dao.UserRepository;
+import com.lantaiyuan.carpool.common.dao.repository.UserRepository;
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.common.domain.User;
+import com.lantaiyuan.carpool.common.domain.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

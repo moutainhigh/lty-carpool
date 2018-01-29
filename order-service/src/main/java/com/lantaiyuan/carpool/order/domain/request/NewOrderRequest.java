@@ -2,7 +2,7 @@ package com.lantaiyuan.carpool.order.domain.request;
 
 
 import com.lantaiyuan.carpool.common.Validate;
-import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.common.domain.entity.Order;
 import lombok.Data;
 
 import java.io.Serializable;

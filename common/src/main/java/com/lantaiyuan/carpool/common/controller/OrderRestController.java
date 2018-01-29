@@ -3,8 +3,8 @@ package com.lantaiyuan.carpool.common.controller;
 
 import com.lantaiyuan.carpool.common.ResultObject;
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
-import com.lantaiyuan.carpool.common.dao.OrderRepository;
-import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.common.dao.repository.OrderRepository;
+import com.lantaiyuan.carpool.common.domain.entity.Order;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
