@@ -15,12 +15,15 @@ spring:
   cloud:
     stream:
       bindings:
-        subscribe: # @See personal.leo.tutorial.stream.consumer0.channel.LogSubscribeChannel.SUBSCRIBE
-          destination: topic-log
+        publish:
+          destination: topic-test
       kafka:
         binder: #指定kafka broker和zookeeper nodes
           brokers:
-            - 192.168.1.90:9000
-            - 192.168.1.90:9001
-            - 192.168.1.90:9002
-          zkNodes: 192.168.1.90:2181
+            - 10.1.254.11:6667
+            - 10.1.254.12:6667
+            - 10.1.254.13:6667
+          zkNodes:
+            - 10.1.254.11:2181
+            - 10.1.254.12:2181
+            - 10.1.254.13:2181

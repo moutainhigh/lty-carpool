@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChargeController {
     @Autowired
     private IChargeService chargeService;
-    @RequestMapping(value = "/order/add2Route", method = RequestMethod.POST)
+    @RequestMapping(value = "/charge", method = RequestMethod.POST)
     public ResultObject charge(@RequestBody ChargeRequest chargeRequest) {
         if(!chargeRequest.validate()){
             return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
