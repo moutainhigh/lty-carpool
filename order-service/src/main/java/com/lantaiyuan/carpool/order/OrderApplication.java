@@ -11,8 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date: 2017/12/27$ 14:03$
  * @description:用户进入
  */
-@SpringBootApplication
-@ComponentScan(value={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain"})
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain"})
 @Slf4j
 public class OrderApplication {
     public static void main(String[] args) {

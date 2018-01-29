@@ -11,8 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date: 2018/1/26$ 15:51$
  * @description:
  */
-@SpringBootApplication
-@ComponentScan(value={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain"})
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.dao","com.lantaiyuan.carpool.common.domain"})
 @Slf4j
 public class WebsocketApplication {
     public static void main(String[] args) {

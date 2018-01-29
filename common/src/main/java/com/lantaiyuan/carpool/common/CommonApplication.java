@@ -4,6 +4,7 @@ import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author: Administrator$
@@ -15,6 +16,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class CommonApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CommonApplication.class, args);
+        ApplicationContext ctx=SpringApplication.run(CommonApplication.class, args);
+        String[] beanNames =  ctx.getBeanDefinitionNames();
+        log.info("所以beanNames个数："+beanNames.length);
+        for(String bn:beanNames){
+            log.info(bn);
+        }
     }
 }
