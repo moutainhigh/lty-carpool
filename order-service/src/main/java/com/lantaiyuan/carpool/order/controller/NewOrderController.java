@@ -3,6 +3,9 @@ package com.lantaiyuan.carpool.order.controller;
 
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
+import com.lantaiyuan.carpool.common.common.dao.BusRepository;
+import com.lantaiyuan.carpool.common.common.dao.OrderRepository;
+import com.lantaiyuan.carpool.common.common.domain.Bus;
 import com.lantaiyuan.carpool.order.domain.request.NewOrderRequest;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +25,11 @@ import org.springframework.web.bind.annotation.*;
 public class NewOrderController {
     @Autowired
     private INewOrderService newOrderService;
-
+    @Autowired
+    private OrderRepository orderRepository;
     @RequestMapping(value = "/order/newOrder", method = RequestMethod.POST)
     public ResultObject newOrder(@RequestBody NewOrderRequest newOrderRequest) {
+        orderRepository.findOne(123L);
         if(!newOrderRequest.validate()){
             return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
         }

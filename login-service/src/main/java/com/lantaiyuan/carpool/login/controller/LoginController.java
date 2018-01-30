@@ -5,8 +5,6 @@ import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.login.domain.request.LoginRequest;
 import com.lantaiyuan.carpool.login.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.login.service.ILoginService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

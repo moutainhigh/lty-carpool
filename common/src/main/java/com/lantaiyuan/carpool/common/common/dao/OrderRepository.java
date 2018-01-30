@@ -10,5 +10,5 @@ import org.springframework.data.repository.CrudRepository;
  * @description:
  */
 
-public interface OrderRepository extends CrudRepository<Order, String> {
+public interface OrderRepository extends CrudRepository<Order, Long> {
 }

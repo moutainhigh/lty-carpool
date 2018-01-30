@@ -26,7 +26,7 @@ public class OrderRestController {
 
     @ApiOperation(value="根据订单id，查询订单信息",produces = "application/json")
     @RequestMapping(value = "/api/order/{id}", method = RequestMethod.GET)
-    public ResultObject index(@PathVariable("id") String id) {
+    public ResultObject index(@PathVariable("id") Long id) {
         Order order = orderRepository.findOne(id);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), order);
         if(order ==null){
@@ -48,7 +48,7 @@ public class OrderRestController {
     }
     @ApiOperation(value="根据订单id，删除订单信息",produces = "application/json")
     @RequestMapping(value = "/api/order/{id}", method = RequestMethod.DELETE)
-    public ResultObject modifyOrder(@PathVariable("id") String id) {
+    public ResultObject modifyOrder(@PathVariable("id") Long id) {
         orderRepository.delete(id);
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
     }

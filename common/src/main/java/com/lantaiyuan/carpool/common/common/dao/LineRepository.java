@@ -11,5 +11,5 @@ import org.springframework.data.repository.CrudRepository;
  * @description:
  */
 
-public interface LineRepository extends CrudRepository<Line, String> {
+public interface LineRepository extends CrudRepository<Line, Long> {
 }
