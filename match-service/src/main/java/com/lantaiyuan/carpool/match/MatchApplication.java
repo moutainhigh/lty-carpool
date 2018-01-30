@@ -13,11 +13,11 @@ import org.springframework.context.ApplicationContext;
  * @date: 2018/1/10$ 11:47$
  * @description:
  */
-@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.match"})
-@Slf4j
 @EnableBinding({
         MatchSubscribeChannel.class
 })
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.match"})
+@Slf4j
 public class MatchApplication {
     public static void main(String[] args) {
         ApplicationContext ctx =SpringApplication.run(MatchApplication.class, args);

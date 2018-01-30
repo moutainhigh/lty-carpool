@@ -23,7 +23,6 @@ public class NewOrderServiceImpl implements INewOrderService {
     @Override
     public int newOrder(NewOrderRequest newOrderRequest) {
         Message<String> msg = MessageBuilder.withPayload("newOrder").build();
-        System.out.println("newOrder");
         publishChannel.publish().send(msg);
         return 0;
     }
