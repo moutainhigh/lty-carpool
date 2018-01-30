@@ -50,6 +50,6 @@ public class BusRestController {
     @RequestMapping(value = "/api/bus/{id}", method = RequestMethod.DELETE)
     public ResultObject modifyBus(@PathVariable("id") String id) {
         busRepository.delete(id);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }
 }

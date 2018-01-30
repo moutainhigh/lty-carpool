@@ -20,9 +20,24 @@ public class ResultObject {
      */
     private String massage;
 
-    public ResultObject(int code, Object data) {
+    public ResultObject(Integer code) {
+        this.code = code;
+    }
+
+    public ResultObject(Integer code, Object data) {
         this.code = code;
         this.data = data;
+    }
+
+    public ResultObject(Integer code, String massage) {
+        this.code = code;
+        this.massage = massage;
+    }
+
+    public ResultObject(int code, Object data, String massage) {
+        this.code = code;
+        this.data = data;
+        this.massage = massage;
     }
 
 }

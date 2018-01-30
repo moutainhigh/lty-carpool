@@ -50,6 +50,6 @@ public class UserRestController {
     @RequestMapping(value = "/api/user/{id}", method = RequestMethod.DELETE)
     public ResultObject modifyUser(@PathVariable("id") String id) {
         userRepository.delete(id);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }
 }

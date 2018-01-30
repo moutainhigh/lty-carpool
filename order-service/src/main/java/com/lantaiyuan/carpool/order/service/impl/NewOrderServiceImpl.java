@@ -1,5 +1,6 @@
 package com.lantaiyuan.carpool.order.service.impl;
 
+import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.dao.OrderRepository;
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
@@ -26,9 +27,27 @@ public class NewOrderServiceImpl implements INewOrderService {
     private OrderRepository orderRepository;
     @Override
     public int newOrder(NewOrderRequest newOrderRequest) {
-        Order order = orderRepository.findOne(123L);
-        Message<String> msg = MessageBuilder.withPayload("newOrder").build();
-        publishChannel.publish().send(msg);
-        return 0;
+        Order order = newOrderRequest.getOrder();
+        boolean alreadyPaid=order.getAlreadyPaid();
+        if(alreadyPaid){
+            if(canAdd(order)){
+                orderRepository.save(order);
+                Message<Order> msg = MessageBuilder.withPayload(order).build();
+                publishChannel.publish().send(msg);
+                return ResultCodeEnum.SUCCESS.getValue();
+            }else {
+                return ResultCodeEnum.ORDER_INVALIDATE.getValue();
+            }
+        }else{
+            if(canAdd(order)){
+                return ResultCodeEnum.ORDER_CAN_ADD.getValue();
+            }else {
+                return ResultCodeEnum.ORDER_INVALIDATE.getValue();
+            }
+        }
+    }
+
+    boolean canAdd(Order order){
+        return true;
     }
 }

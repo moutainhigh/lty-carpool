@@ -50,6 +50,6 @@ public class DriverRestController {
     @RequestMapping(value = "/api/driver/{id}", method = RequestMethod.DELETE)
     public ResultObject modifyDriver(@PathVariable("id") String id) {
         driverRepository.delete(id);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }
 }

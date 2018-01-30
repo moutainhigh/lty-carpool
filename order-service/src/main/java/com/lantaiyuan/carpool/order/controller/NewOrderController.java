@@ -27,7 +27,7 @@ public class NewOrderController {
     public ResultObject newOrder(@RequestBody NewOrderRequest newOrderRequest) {
         orderRepository.findOne(123L);
         if(!newOrderRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue(), 0);
+            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue());
         }
         int r = newOrderService.newOrder(newOrderRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);

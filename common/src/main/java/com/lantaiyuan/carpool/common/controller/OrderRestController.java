@@ -50,6 +50,6 @@ public class OrderRestController {
     @RequestMapping(value = "/api/order/{id}", method = RequestMethod.DELETE)
     public ResultObject modifyOrder(@PathVariable("id") Long id) {
         orderRepository.delete(id);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }
 }

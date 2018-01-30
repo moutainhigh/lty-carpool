@@ -1,5 +1,8 @@
 package com.lantaiyuan.carpool.match.service;
 
+import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
+
 /**
  * 撮合服务
  * @author qiuwanshan
@@ -7,7 +10,13 @@ package com.lantaiyuan.carpool.match.service;
 public interface IMatchService {
     /**
      * 撮合
-     * @param msg
+     * @param cancelRequest
      */
-    void match(String msg);
+    void matchCancel(CancelRequest cancelRequest);
+
+    /**
+     *
+     * @param order
+     */
+    void matchOrder(Order order);
 }

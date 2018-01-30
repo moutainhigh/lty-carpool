@@ -50,6 +50,6 @@ public class LineRestController {
     @RequestMapping(value = "/api/line/{id}", method = RequestMethod.DELETE)
     public ResultObject modifyLine(@PathVariable("id") Long id) {
         lineRepository.delete(id);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),null);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }
 }

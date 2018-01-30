@@ -1,20 +1,20 @@
 package com.lantaiyuan.carpool.common;
 
+import lombok.Data;
 import lombok.Getter;
 
 /**
  * @author: Administrator$
  * @project: lty-carpool$
- * @date: 2018/1/9$ 15:39$
+ * @date: 2018/1/30$ 16:09$
  * @description:
  */
-public enum ResultCodeEnum {
-    SUCCESS(100),INVALIDATE(101),ORDER_INVALIDATE(102),ORDER_CAN_ADD(103),ORDER_CAN_NOT_CANCEL(104);
+public enum OrderStatusEnum {
+    NEW(101),CANCEL(102);
     @Getter
     private Integer value;
 
-    ResultCodeEnum(Integer value) {
+    OrderStatusEnum(Integer value) {
         this.value = value;
     }
-
 }

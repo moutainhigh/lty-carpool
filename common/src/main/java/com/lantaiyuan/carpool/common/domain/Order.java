@@ -55,12 +55,26 @@ public class Order implements Validate,Serializable {
      */
     private Long lineId;
 
+    /**
+     * 是否支付
+     */
+    private Boolean alreadyPaid;
+    /**
+     * 订单状态
+     */
+    private Integer orderStatus;
+
     public Order() {
 
     }
 
     @Override
     public Boolean validate() {
-        return null;
+        if(!alreadyPaid){
+            if(lineId==0){
+                return false;
+            }
+        }
+        return true;
     }
 }
