@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.common.common.domain;
+package com.lantaiyuan.carpool.common.domain;
 
 
 import com.lantaiyuan.carpool.common.Validate;

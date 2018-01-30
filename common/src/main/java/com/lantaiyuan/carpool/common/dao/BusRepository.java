@@ -1,6 +1,6 @@
-package com.lantaiyuan.carpool.common.common.dao;
+package com.lantaiyuan.carpool.common.dao;
 
-import com.lantaiyuan.carpool.common.common.domain.Bus;
+import com.lantaiyuan.carpool.common.domain.Bus;
 import org.springframework.data.repository.CrudRepository;
 
 /**

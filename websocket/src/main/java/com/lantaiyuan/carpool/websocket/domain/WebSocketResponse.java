@@ -1,6 +1,6 @@
 package com.lantaiyuan.carpool.websocket.domain;
 import com.lantaiyuan.carpool.common.Validate;
-import com.lantaiyuan.carpool.common.common.domain.Line;
+import com.lantaiyuan.carpool.common.domain.Line;
 import lombok.Data;
 import org.hibernate.criterion.Order;
 

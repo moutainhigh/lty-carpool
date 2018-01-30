@@ -1,5 +1,6 @@
 package com.lantaiyuan.carpool.order;
 
+import com.lantaiyuan.carpool.common.CommonApplication;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -14,18 +15,16 @@ import org.springframework.context.annotation.ComponentScan;
  * @date: 2017/12/27$ 14:03$
  * @description:订单
  */
-@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.order"})
+@SpringBootApplication
 @Slf4j
 @EnableBinding({
         PublishChannel.class
 })
 public class OrderApplication {
     public static void main(String[] args) {
-        ApplicationContext ctx =SpringApplication.run(OrderApplication.class, args);
-        String[] beanNames =  ctx.getBeanDefinitionNames();
-        log.info("所以beanNames个数："+beanNames.length);
-        for(String bn:beanNames){
-            log.info(bn);
-        }
+        Object[] objects= new Object[2];
+        objects[0] = CommonApplication.class;
+        objects[1] = OrderApplication.class;
+        SpringApplication.run(objects, args);
     }
 }

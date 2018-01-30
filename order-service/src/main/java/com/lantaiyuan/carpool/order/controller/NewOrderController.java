@@ -3,14 +3,10 @@ package com.lantaiyuan.carpool.order.controller;
 
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.common.common.dao.BusRepository;
-import com.lantaiyuan.carpool.common.common.dao.OrderRepository;
-import com.lantaiyuan.carpool.common.common.domain.Bus;
+import com.lantaiyuan.carpool.common.dao.OrderRepository;
 import com.lantaiyuan.carpool.order.domain.request.NewOrderRequest;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
