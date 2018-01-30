@@ -1,5 +1,7 @@
 package com.lantaiyuan.carpool.order.service.impl;
 
+import com.lantaiyuan.carpool.common.dao.OrderRepository;
+import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
 import com.lantaiyuan.carpool.order.domain.request.NewOrderRequest;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
@@ -20,8 +22,11 @@ import org.springframework.stereotype.Service;
 public class NewOrderServiceImpl implements INewOrderService {
     @Autowired
     PublishChannel publishChannel;
+    @Autowired
+    private OrderRepository orderRepository;
     @Override
     public int newOrder(NewOrderRequest newOrderRequest) {
+        Order order = orderRepository.findOne(123L);
         Message<String> msg = MessageBuilder.withPayload("newOrder").build();
         publishChannel.publish().send(msg);
         return 0;
