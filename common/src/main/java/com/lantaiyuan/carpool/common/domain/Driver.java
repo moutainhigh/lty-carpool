@@ -21,7 +21,7 @@ public class Driver implements Validate,Serializable {
     private String driverId;
     private String driverName;
     private Integer driverJudgement;
-    private String driverPhoneNo;
+    private String driverPhoneNumber;
 
     public Driver() {
     }

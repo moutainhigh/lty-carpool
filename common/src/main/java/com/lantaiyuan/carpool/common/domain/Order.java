@@ -21,14 +21,17 @@ public class Order implements Validate,Serializable {
     private Long orderId;
     private String cityCode;
     private String userId;
-    private String phoneNumber;
+    private String userPhoneNumber;
     private String startName;
     private Double startLongitude;
     private Double startLatitude;
     private String endName;
     private Double endLongitude;
     private Double endLatitude;
-    private Integer number;
+    /**
+     * 订单座位数
+     */
+    private Integer seatCount;
     private Integer maxWalkDistance;
     private String earliestStartTime;
     private String latestStartTime;

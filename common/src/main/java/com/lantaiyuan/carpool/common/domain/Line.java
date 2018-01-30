@@ -19,16 +19,12 @@ public class Line implements Validate,Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long lineId;
+    private String orderId;
     private String cityCode;
-    private String userId;
-    private Integer lineStatus;
-    private Integer lineExpectTime;
-    private String location;
-    private Integer linePersons;
-    private Integer requiredPersons;
     private Integer departTime;
     private String driverId;
     private String busId;
+
 
     public Line() {
     }
