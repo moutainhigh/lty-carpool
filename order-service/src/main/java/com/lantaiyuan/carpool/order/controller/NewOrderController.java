@@ -21,11 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class NewOrderController {
     @Autowired
     private INewOrderService newOrderService;
-    @Autowired
-    private OrderRepository orderRepository;
     @RequestMapping(value = "/order/newOrder", method = RequestMethod.POST)
     public ResultObject newOrder(@RequestBody NewOrderRequest newOrderRequest) {
-        orderRepository.findOne(123L);
         if(!newOrderRequest.validate()){
             return new ResultObject(ResultCodeEnum.INVALIDATE.getValue());
         }

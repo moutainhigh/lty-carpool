@@ -31,7 +31,7 @@ public class NewOrderServiceImpl implements INewOrderService {
         boolean alreadyPaid=order.getAlreadyPaid();
         if(alreadyPaid){
             if(canAdd(order)){
-                orderRepository.save(order);
+//                orderRepository.save(order);
                 Message<Order> msg = MessageBuilder.withPayload(order).build();
                 publishChannel.publish().send(msg);
                 return ResultCodeEnum.SUCCESS.getValue();

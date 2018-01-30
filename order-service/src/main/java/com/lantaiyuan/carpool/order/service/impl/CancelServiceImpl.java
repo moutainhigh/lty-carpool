@@ -40,7 +40,7 @@ public class CancelServiceImpl implements ICancelService {
     void updateOrder(CancelRequest cancelRequest){
         Order order= new Order();
         order.setOrderStatus(OrderStatusEnum.CANCEL.getValue());
-        orderRepository.save(order);
+//        orderRepository.save(order);
     }
     boolean canCancel(CancelRequest cancelRequest){
         return true;
