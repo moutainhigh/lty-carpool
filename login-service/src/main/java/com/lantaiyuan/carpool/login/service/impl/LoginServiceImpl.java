@@ -8,6 +8,10 @@ import com.lantaiyuan.carpool.login.domain.response.Line2User;
 import com.lantaiyuan.carpool.login.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +26,8 @@ import java.util.List;
 @Service
 @Slf4j
 public class LoginServiceImpl implements ILoginService {
-
+    @Autowired
+    private StringRedisTemplate localRedisTemplate;
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
         User user=getUser(loginRequest);
