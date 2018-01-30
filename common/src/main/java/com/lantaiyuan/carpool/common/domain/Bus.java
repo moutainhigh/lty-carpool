@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @date: 2018/1/15$ 15:52$
  * @description:
  */
+@Table(name="carpool_bus")
 @Entity
 @Data
 public class Bus  implements Validate,Serializable {

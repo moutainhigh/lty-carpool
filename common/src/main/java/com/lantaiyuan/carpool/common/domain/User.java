@@ -4,10 +4,7 @@ package com.lantaiyuan.carpool.common.domain;
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -16,6 +13,7 @@ import java.io.Serializable;
  * @date: 2018/1/8$ 9:53$
  * @description:
  */
+@Table(name="carpool_user")
 @Entity
 @Data
 public class User implements Validate,Serializable {
