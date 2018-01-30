@@ -22,7 +22,8 @@ public class NewOrderServiceImpl implements INewOrderService {
     PublishChannel publishChannel;
     @Override
     public int newOrder(NewOrderRequest newOrderRequest) {
-        Message<String> msg = MessageBuilder.withPayload("jh").build();
+        Message<String> msg = MessageBuilder.withPayload("newOrder").build();
+        log.info("newOrder");
         publishChannel.publish().send(msg);
         return 0;
     }

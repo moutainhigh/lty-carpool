@@ -22,7 +22,7 @@ public class CancelServiceImpl implements ICancelService {
     PublishChannel publishChannel;
     @Override
     public int cancel(CancelRequest cancelRequest) {
-        Message<String> msg = MessageBuilder.withPayload("jh").build();
+        Message<String> msg = MessageBuilder.withPayload("cancel").build();
         publishChannel.publish().send(msg);
         return 0;
     }

@@ -1,11 +1,11 @@
 package com.lantaiyuan.carpool.match;
 
-import com.lantaiyuan.carpool.match.channel.SubscribeChannel;
+import com.lantaiyuan.carpool.match.channel.MatchSubscribeChannel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author: Administrator$
@@ -16,10 +16,15 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.match"})
 @Slf4j
 @EnableBinding({
-        SubscribeChannel.class
+        MatchSubscribeChannel.class
 })
 public class MatchApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MatchApplication.class, args);
+        ApplicationContext ctx =SpringApplication.run(MatchApplication.class, args);
+        String[] beanNames =  ctx.getBeanDefinitionNames();
+        log.info("所以beanNames个数："+beanNames.length);
+        for(String bn:beanNames){
+            log.info(bn);
+        }
     }
 }

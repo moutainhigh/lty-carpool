@@ -3,7 +3,6 @@ package com.lantaiyuan.carpool.websocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author: Administrator$
@@ -13,8 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool.common.common","com.lantaiyuan.carpool.websocket"})
 @Slf4j
-public class WebsocketApplication {
+public class WebSocketApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WebsocketApplication.class, args);
+        SpringApplication.run(WebSocketApplication.class, args);
     }
 }
