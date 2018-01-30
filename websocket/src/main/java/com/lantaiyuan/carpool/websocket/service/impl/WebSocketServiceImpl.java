@@ -6,6 +6,7 @@ import com.lantaiyuan.carpool.websocket.domain.WebSocketResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,7 @@ public class WebSocketServiceImpl implements IWebSocketService {
     private StringRedisTemplate localRedisTemplate;
     @Override
     public WebSocketResponse getMatch(WebSocketRequest webSocketRequest) {
+//        localRedisTemplate
         return null;
     }
 }

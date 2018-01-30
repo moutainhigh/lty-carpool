@@ -1,6 +1,7 @@
 package com.lantaiyuan.carpool.websocket.domain;
 import com.lantaiyuan.carpool.common.Validate;
 import com.lantaiyuan.carpool.common.domain.Line;
+import com.lantaiyuan.carpool.login.domain.response.Line2User;
 import lombok.Data;
 import org.hibernate.criterion.Order;
 
@@ -15,8 +16,7 @@ import java.io.Serializable;
 @Data
 public class WebSocketResponse implements Validate,Serializable {
     int status;
-    Order order;
-    Line line;
+    Line2User line;
 
     @Override
     public Boolean validate() {
