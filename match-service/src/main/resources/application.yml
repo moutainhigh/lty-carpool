@@ -14,7 +14,7 @@ spring:
   cloud:
     stream:
       bindings:
-        publish:
+        subscribe:
           destination: topic-log
       kafka:
         binder: #指定kafka broker和zookeeper nodes
