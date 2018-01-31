@@ -35,7 +35,7 @@ public class NewOrderServiceImpl implements INewOrderService {
         if(alreadyPaid){
             if(canAdd(order)){
                 orderRepository.save(order);
-                Message<Order> msg = MessageBuilder.withPayload(order).build();
+                Message<Order> msg = MessageBuilder.withPayload(order).setHeader("contentType", order.getClass().getSimpleName()).build();
                 publishChannel.publish().send(msg);
                 return ResultCodeEnum.SUCCESS.getValue();
             }else {

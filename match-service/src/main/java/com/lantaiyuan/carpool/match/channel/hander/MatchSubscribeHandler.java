@@ -6,6 +6,7 @@ import com.lantaiyuan.carpool.match.service.IMatchService;
 import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,15 +19,15 @@ import org.springframework.stereotype.Component;
 public class MatchSubscribeHandler {
     @Autowired
     IMatchService matchService;
-    @StreamListener(MatchSubscribeChannel.SUBSCRIBE)
-    public void handleCancelRequest(CancelRequest cancelRequest) {
+    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='CancelRequest'")
+    public void handleCancelRequest(@Payload CancelRequest cancelRequest) {
         System.out.println(cancelRequest.toString());
         matchService.matchCancel(cancelRequest);
     }
 
-//    @StreamListener(MatchSubscribeChannel.SUBSCRIBE)
-//    public void handleNewOrder(Order order) {
-//        System.out.println(order.toString());
-//        matchService.matchOrder(order);
-//    }
+    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='Order'")
+    public void handleNewOrder(@Payload Order order) {
+        System.out.println(order.toString());
+        matchService.matchOrder(order);
+    }
 }
