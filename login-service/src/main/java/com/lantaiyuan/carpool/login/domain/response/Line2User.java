@@ -27,6 +27,6 @@ public class Line2User implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }

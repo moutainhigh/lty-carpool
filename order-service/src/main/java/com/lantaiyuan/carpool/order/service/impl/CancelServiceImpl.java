@@ -3,7 +3,9 @@ package com.lantaiyuan.carpool.order.service.impl;
 import com.lantaiyuan.carpool.common.OrderStatusEnum;
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.dao.OrderRepository;
+import com.lantaiyuan.carpool.common.dao.UserRepository;
 import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
 import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
 import com.lantaiyuan.carpool.order.service.ICancelService;
@@ -29,6 +31,8 @@ public class CancelServiceImpl implements ICancelService {
     PublishChannel publishChannel;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public int cancel(CancelRequest cancelRequest) {
         if(canCancel(cancelRequest)){
@@ -41,9 +45,12 @@ public class CancelServiceImpl implements ICancelService {
         }
     }
     void updateOrder(CancelRequest cancelRequest){
-        Order order= new Order();
+        User user=userRepository.findOne(cancelRequest.getUserId());
+        log.error(orderRepository.toString());
+        Order order=orderRepository.findOne(user.getOrderId());
+        log.error(order.toString());
         order.setOrderStatus(OrderStatusEnum.CANCEL.getValue());
-//        orderRepository.save(order);
+        orderRepository.save(order);
     }
     boolean canCancel(CancelRequest cancelRequest){
         return true;

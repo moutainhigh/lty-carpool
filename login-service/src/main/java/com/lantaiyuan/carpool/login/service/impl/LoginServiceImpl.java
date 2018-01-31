@@ -1,6 +1,7 @@
 package com.lantaiyuan.carpool.login.service.impl;
 
 import com.lantaiyuan.carpool.common.UserStatusEnum;
+import com.lantaiyuan.carpool.common.dao.UserRepository;
 import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.login.domain.request.LoginRequest;
@@ -28,15 +29,17 @@ import java.util.List;
 public class LoginServiceImpl implements ILoginService {
     @Autowired
     private StringRedisTemplate localRedisTemplate;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
         User user=getUser(loginRequest);
         LoginResponse loginResponse =new LoginResponse();
-        if(user.getStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
+        if(user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
             List<Line2User> lines = recommend(loginRequest);
             loginResponse.setLines(lines);
 
-        }else if(user.getStatus().equals( UserStatusEnum.MATCH_STATUS.getValue())){
+        }else if(user.getUserStatus().equals( UserStatusEnum.MATCH_STATUS.getValue())){
             List<Line2User> lines = getLine(loginRequest);
             loginResponse.setLines(lines);
         }
@@ -46,7 +49,7 @@ public class LoginServiceImpl implements ILoginService {
 
 
     User getUser(LoginRequest loginRequest){
-        return  new User();
+        return  userRepository.findOne(loginRequest.getUserId());
     }
 
     List<Line2User> recommend(LoginRequest loginRequest){

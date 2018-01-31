@@ -20,6 +20,6 @@ public class Tour2User implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }

@@ -22,6 +22,6 @@ public class LoginResponse implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }

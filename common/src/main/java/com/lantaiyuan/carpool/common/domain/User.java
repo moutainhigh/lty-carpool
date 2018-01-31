@@ -21,8 +21,8 @@ public class User implements Validate,Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private  String userId;
     private  Integer userStatus;
-    private String orderId;
-    private String lineId;
+    private Long orderId;
+    private Long lineId;
 
     public User() {
     }

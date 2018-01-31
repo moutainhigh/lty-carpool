@@ -23,6 +23,9 @@ public class NewOrderRequest  implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
+        if(!order.validate()){
+            return false;
+        }
         return true;
     }
 }
