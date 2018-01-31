@@ -2,16 +2,13 @@ package com.lantaiyuan.carpool.login.service.impl;
 
 import com.lantaiyuan.carpool.common.UserStatusEnum;
 import com.lantaiyuan.carpool.common.dao.UserRepository;
-import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.User;
-import com.lantaiyuan.carpool.login.domain.request.LoginRequest;
-import com.lantaiyuan.carpool.login.domain.response.Line2User;
-import com.lantaiyuan.carpool.login.domain.response.LoginResponse;
+import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
+import com.lantaiyuan.carpool.common.domain.response.Line2User;
+import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -47,16 +44,30 @@ public class LoginServiceImpl implements ILoginService {
     }
 
 
-
+    /**
+     * 查询用户
+     * @param loginRequest
+     * @return
+     */
     User getUser(LoginRequest loginRequest){
         return  userRepository.findOne(loginRequest.getUserId());
     }
 
+    /**
+     * 推荐线路
+     * @param loginRequest
+     * @return
+     */
     List<Line2User> recommend(LoginRequest loginRequest){
         List<Line2User> lines = new ArrayList<>();
         return lines;
     }
 
+    /**
+     * 获取用户当前所在处线路状况
+     * @param loginRequest
+     * @return
+     */
     List<Line2User> getLine(LoginRequest loginRequest){
         List<Line2User> lines = new ArrayList<>();
         return lines;

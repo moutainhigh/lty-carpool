@@ -10,7 +10,7 @@ import lombok.Getter;
  * @description:
  */
 public enum OrderStatusEnum {
-    NEW(101),CANCEL(102);
+    MATCH(101),CANCEL(102); 
     @Getter
     private Integer value;
 

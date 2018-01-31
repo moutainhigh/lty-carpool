@@ -2,8 +2,8 @@ package com.lantaiyuan.carpool.login.controller;
 
 import com.lantaiyuan.carpool.common.ResultObject;
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
-import com.lantaiyuan.carpool.login.domain.request.LoginRequest;
-import com.lantaiyuan.carpool.login.domain.response.LoginResponse;
+import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
+import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

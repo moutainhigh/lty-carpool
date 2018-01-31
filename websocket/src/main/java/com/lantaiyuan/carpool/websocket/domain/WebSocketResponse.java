@@ -1,9 +1,7 @@
 package com.lantaiyuan.carpool.websocket.domain;
 import com.lantaiyuan.carpool.common.Validate;
-import com.lantaiyuan.carpool.common.domain.Line;
-import com.lantaiyuan.carpool.login.domain.response.Line2User;
+import com.lantaiyuan.carpool.common.domain.response.Line2User;
 import lombok.Data;
-import org.hibernate.criterion.Order;
 
 import java.io.Serializable;
 

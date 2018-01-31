@@ -1,6 +1,7 @@
 package com.lantaiyuan.carpool.order.service;
 
-import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
+
+import com.lantaiyuan.carpool.common.domain.request.CancelRequest;
 
 /**
  * @author: Administrator$

@@ -1,7 +1,7 @@
 package com.lantaiyuan.carpool.match.service;
 
 import com.lantaiyuan.carpool.common.domain.Order;
-import com.lantaiyuan.carpool.order.domain.request.CancelRequest;
+import com.lantaiyuan.carpool.common.domain.request.CancelRequest;
 
 /**
  * 撮合服务

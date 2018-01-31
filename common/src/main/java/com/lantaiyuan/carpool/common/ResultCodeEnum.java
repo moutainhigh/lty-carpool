@@ -9,7 +9,7 @@ import lombok.Getter;
  * @description:
  */
 public enum ResultCodeEnum {
-    SUCCESS(100),INVALIDATE(101),ORDER_INVALIDATE(102),ORDER_CAN_ADD(103),ORDER_CAN_NOT_CANCEL(104);
+    SUCCESS(100),INVALIDATE_PARAM(101),ORDER_INVALIDATE(102),ORDER_CAN_ADD(103),ORDER_CAN_NOT_CANCEL(104);
     @Getter
     private Integer value;
 

@@ -3,8 +3,7 @@ package com.lantaiyuan.carpool.order.controller;
 
 import com.lantaiyuan.carpool.common.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.common.dao.OrderRepository;
-import com.lantaiyuan.carpool.order.domain.request.NewOrderRequest;
+import com.lantaiyuan.carpool.common.domain.request.NewOrderRequest;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class NewOrderController {
     @RequestMapping(value = "/order/newOrder", method = RequestMethod.POST)
     public ResultObject newOrder(@RequestBody NewOrderRequest newOrderRequest) {
         if(!newOrderRequest.validate()){
-            ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE.getValue());
+            ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
             rs.setMassage("请检查参数");
             return rs;
         }

@@ -32,7 +32,7 @@ public class WebSocketController {
     public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
         this.webSocketRequest = webSocketRequest;
         if(!webSocketRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE.getValue());
+            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
         }
         WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
