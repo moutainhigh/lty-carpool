@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Data
 public class Bus  implements Validate,Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private String busId;
     private Integer departBusType;
     private Integer departBusSeats;

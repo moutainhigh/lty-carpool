@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Data
 public class Line implements Validate,Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long lineId;
     private Long orderId;
     private String cityCode;

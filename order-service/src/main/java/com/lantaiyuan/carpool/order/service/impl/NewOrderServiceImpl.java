@@ -41,9 +41,7 @@ public class NewOrderServiceImpl implements INewOrderService {
         if(alreadyPaid){
             if(canAdd(order)){
                 Long orderId=idService.genId();
-                log.error(String.valueOf(orderId));
                 order.setOrderId(orderId);
-                log.error(order.toString());
                 orderRepository.save(order);
                 Message<Order> msg = MessageBuilder.withPayload(order).setHeader("contentType", order.getClass().getCanonicalName()).build();
                 publishChannel.publish().send(msg);

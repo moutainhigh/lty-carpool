@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Data
 public class Driver implements Validate,Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private String driverId;
     private String driverName;
     private Integer driverJudgement;

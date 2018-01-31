@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Data
 public class User implements Validate,Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private  String userId;
     private  Integer userStatus;
     private Long orderId;
