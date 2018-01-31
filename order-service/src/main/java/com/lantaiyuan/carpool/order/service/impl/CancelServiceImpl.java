@@ -37,7 +37,7 @@ public class CancelServiceImpl implements ICancelService {
     public int cancel(CancelRequest cancelRequest) {
         if(canCancel(cancelRequest)){
             updateOrder(cancelRequest);
-            Message<CancelRequest> msg = MessageBuilder.withPayload(cancelRequest).setHeader("contentType", cancelRequest.getClass().getSimpleName()).build();
+            Message<CancelRequest> msg = MessageBuilder.withPayload(cancelRequest).setHeader("contentType", cancelRequest.getClass().getCanonicalName()).build();
             publishChannel.publish().send(msg);
             return ResultCodeEnum.SUCCESS.getValue();
         }else{

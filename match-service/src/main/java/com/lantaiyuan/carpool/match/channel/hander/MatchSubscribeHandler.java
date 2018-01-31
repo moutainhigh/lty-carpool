@@ -19,13 +19,13 @@ import org.springframework.stereotype.Component;
 public class MatchSubscribeHandler {
     @Autowired
     IMatchService matchService;
-    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='CancelRequest'")
+    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='com.lantaiyuan.carpool.order.domain.request.CancelRequest'")
     public void handleCancelRequest(@Payload CancelRequest cancelRequest) {
         System.out.println(cancelRequest.toString());
         matchService.matchCancel(cancelRequest);
     }
 
-    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='Order'")
+    @StreamListener(target=MatchSubscribeChannel.SUBSCRIBE,condition = "headers['contentType']=='com.lantaiyuan.carpool.common.domain.Order'")
     public void handleNewOrder(@Payload Order order) {
         System.out.println(order.toString());
         matchService.matchOrder(order);
