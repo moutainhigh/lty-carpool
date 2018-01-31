@@ -24,9 +24,9 @@ public class MatchSubscribeHandler {
         matchService.matchCancel(cancelRequest);
     }
 
-    @StreamListener(MatchSubscribeChannel.SUBSCRIBE)
-    public void handleNewOrder(Order order) {
-        System.out.println(order.toString());
-        matchService.matchOrder(order);
-    }
+//    @StreamListener(MatchSubscribeChannel.SUBSCRIBE)
+//    public void handleNewOrder(Order order) {
+//        System.out.println(order.toString());
+//        matchService.matchOrder(order);
+//    }
 }

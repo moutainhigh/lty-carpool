@@ -46,9 +46,7 @@ public class CancelServiceImpl implements ICancelService {
     }
     void updateOrder(CancelRequest cancelRequest){
         User user=userRepository.findOne(cancelRequest.getUserId());
-        log.error(orderRepository.toString());
         Order order=orderRepository.findOne(user.getOrderId());
-        log.error(order.toString());
         order.setOrderStatus(OrderStatusEnum.CANCEL.getValue());
         orderRepository.save(order);
     }

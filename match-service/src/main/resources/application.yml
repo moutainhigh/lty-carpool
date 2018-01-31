@@ -15,7 +15,7 @@ spring:
     stream:
       bindings:
         subscribe:
-          destination: topic-log
+          destination: topic-order
       kafka:
         binder: #指定kafka broker和zookeeper nodes
           brokers:
