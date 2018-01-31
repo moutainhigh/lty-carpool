@@ -2,12 +2,15 @@ package com.lantaiyuan.carpool.order;
 
 import com.lantaiyuan.carpool.common.CommonApplication;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
+import com.robert.vesta.service.bean.Id;
+import com.robert.vesta.service.intf.IdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author: Administrator$

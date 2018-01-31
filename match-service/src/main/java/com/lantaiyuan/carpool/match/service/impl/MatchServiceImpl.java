@@ -24,6 +24,10 @@ public class MatchServiceImpl implements IMatchService {
 
     @Override
     public void matchOrder(Order order) {
+        if(0==order.getLineId()){
 
+        }else{
+
+        }
     }
 }
