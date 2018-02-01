@@ -31,6 +31,6 @@ public class Line implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }

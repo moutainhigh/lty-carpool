@@ -28,6 +28,6 @@ public class User implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }

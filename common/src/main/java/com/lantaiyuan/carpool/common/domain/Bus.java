@@ -26,6 +26,6 @@ public class Bus  implements Validate,Serializable {
 
     @Override
     public Boolean validate() {
-        return null;
+        return true;
     }
 }
