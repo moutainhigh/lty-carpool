@@ -1,7 +1,9 @@
 package com.lantaiyuan.carpool.match.service.impl;
 
+import com.lantaiyuan.carpool.common.UserStatusEnum;
 import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.CancelRequest;
 import com.lantaiyuan.carpool.match.service.IMatchService;
 import com.robert.vesta.service.intf.IdService;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -29,54 +32,60 @@ public class MatchServiceImpl implements IMatchService {
     private StringRedisTemplate localRedisTemplate;
     @Autowired
     private IdService idService;
-    BoundHashOperations<String,Long, List<Long>> linePool = localRedisTemplate.boundHashOps("car_pool_line");
+    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps("car_pool_line");
     private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps("car_pool_order");
+    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps("car_pool_user");
     private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps("car_pool_tour");
 
     @Override
     public void matchCancel(CancelRequest cancelRequest) {
-
+        User user= userPool.get(cancelRequest.getUserId());
+        Long lineId=user.getLineId();
+        Long orderId=user.getOrderId();
+        linePool.get(lineId).remove(orderId);
+        if(linePool.get(lineId).size()==0){
+            linePool.delete(lineId);
+        }
+        orderPool.delete(orderId);
+        tourPool.geoRemove(""+orderId+"-"+lineId);
+        userPool.delete(user.getUserId());
     }
 
     @Override
     public void matchOrder(Order order) {
+        //获取起始点
+        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
+        //保存该订单到缓存
+        orderPool.put(order.getOrderId(), order);
+        Long orderId=order.getOrderId();
+        Long lineId = 0L;
         //新订单，没有线路id
         if (0 == order.getLineId()) {
-            //保存该订单到缓存
-            orderPool.put(order.getOrderId(), order);
             Line line = realMatch(order);
-            Long lineId = 0L;
             //有合适线路
-            if (line != null) {
+            if (line.getLineId() != 0) {
                 lineId = line.getLineId();
-                //将订单id添加到线路
-                linePool.get(lineId).add(order.getOrderId());
             }
-            //没有合适线路
+            //没有合适线路，为该订单生成新线路
             else {
                 //生成线路id
                 lineId = idService.genId();
                 ArrayList<Long> orderList= new ArrayList<Long>();
                 orderList.add(order.getOrderId());
-                linePool.put(lineId,orderList);
             }
-            //缓存行程
-            saveTour(order,lineId);
         }
         //有线路id，说明是加入某条线路
         else {
-            //如果能加入
-            if(canAdd(order)){
-                //保存该订单到缓存
-                orderPool.put(order.getOrderId(), order);
-                //将订单id添加到线路缓存
-                Long lineId = order.getLineId();
-                linePool.get(order.getLineId()).add(order.getOrderId());
-                //缓存行程
-                saveTour(order,lineId);
-            }
-
+            //将订单id添加到线路缓存
+            lineId = order.getLineId();
         }
+        //为行程指定id并缓存
+        tourPool.geoAdd(point, ""+orderId+"-"+lineId);
+        User user= new User();
+        user.setUserId(order.getUserId());
+        user.setLineId(lineId);
+        user.setOrderId(orderId);
+        user.setUserStatus(UserStatusEnum.MATCH_STATUS.getValue());
     }
 
     /**
@@ -86,30 +95,10 @@ public class MatchServiceImpl implements IMatchService {
      */
     private Line realMatch(Order order) {
         //获取附近行程
-        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
-        Circle within = new Circle(point,new Distance(100));
-        GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);
-        Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
+//        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
+//        Circle within = new Circle(point,new Distance(100));
+//        GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);
+//        Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
         return new Line();
-    }
-
-    /**
-     * 判断订单能否合适加入
-     *
-     * @param order
-     * @return
-     */
-    private boolean canAdd(Order order) {
-        return true;
-    }
-
-    /**
-     * 缓存行程信息
-     * @param order
-     * @param lineId
-     */
-    private void saveTour(Order order,Long lineId){
-        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
-        tourPool.geoAdd(point, String.valueOf(lineId));
     }
 }
