@@ -13,12 +13,12 @@ import java.util.List;
  * @description:
  */
 @Data
-public class Line2User implements Validate,Serializable {
+public class Line4User implements Validate,Serializable {
     private Long lineId;
     private String cityCode;
     private Integer lineStatus;
     private Long lineExpectTime;
-    private List<Tour2User> tours;
+    private List<Tour4User> tours;
     private Integer linePersons;
     private Integer requiredPersons;
     private Long departTime;

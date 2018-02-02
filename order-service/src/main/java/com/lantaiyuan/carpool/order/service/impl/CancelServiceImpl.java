@@ -1,7 +1,7 @@
 package com.lantaiyuan.carpool.order.service.impl;
 
-import com.lantaiyuan.carpool.common.OrderStatusEnum;
-import com.lantaiyuan.carpool.common.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.constant.OrderStatusEnum;
+import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.dao.OrderRepository;
 import com.lantaiyuan.carpool.common.dao.UserRepository;
 import com.lantaiyuan.carpool.common.domain.Order;

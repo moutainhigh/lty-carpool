@@ -1,7 +1,7 @@
 package com.lantaiyuan.carpool.login.controller;
 
-import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.common.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.constant.ResultObject;
+import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
 import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.login.service.ILoginService;

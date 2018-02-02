@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.common;
+package com.lantaiyuan.carpool.common.constant;
 
 import lombok.Data;
 

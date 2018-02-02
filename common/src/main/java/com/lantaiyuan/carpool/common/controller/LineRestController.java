@@ -1,8 +1,8 @@
 package com.lantaiyuan.carpool.common.controller;
 
 
-import com.lantaiyuan.carpool.common.ResultObject;
-import com.lantaiyuan.carpool.common.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.constant.ResultObject;
+import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.dao.LineRepository;
 import com.lantaiyuan.carpool.common.domain.Line;
 import io.swagger.annotations.Api;

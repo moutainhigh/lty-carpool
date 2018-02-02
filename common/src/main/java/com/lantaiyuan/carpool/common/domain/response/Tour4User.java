@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @description:
  */
 @Data
-public class Tour2User implements Validate,Serializable {
+public class Tour4User implements Validate,Serializable {
     private Double startLongitude;
     private Double startLatitude;
     private Double endLongitude;
@@ -23,7 +23,7 @@ public class Tour2User implements Validate,Serializable {
         return true;
     }
 
-    public Tour2User(Double startLongitude, Double startLatitude, Double endLongitude, Double endLatitude) {
+    public Tour4User(Double startLongitude, Double startLatitude, Double endLongitude, Double endLatitude) {
         this.startLongitude = startLongitude;
         this.startLatitude = startLatitude;
         this.endLongitude = endLongitude;

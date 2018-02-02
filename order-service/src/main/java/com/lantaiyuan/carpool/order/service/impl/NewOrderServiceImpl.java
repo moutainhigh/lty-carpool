@@ -1,20 +1,25 @@
 package com.lantaiyuan.carpool.order.service.impl;
 
-import com.lantaiyuan.carpool.common.ResultCodeEnum;
+import com.lantaiyuan.carpool.common.constant.RedisPoolKey;
+import com.lantaiyuan.carpool.common.constant.ResultCodeEnum;
 import com.lantaiyuan.carpool.common.dao.OrderRepository;
 import com.lantaiyuan.carpool.common.domain.Order;
+import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.NewOrderRequest;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
-import com.robert.vesta.service.bean.Id;
 import com.robert.vesta.service.intf.IdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.redis.core.BoundGeoOperations;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * @author: Administrator$
@@ -28,6 +33,10 @@ import org.springframework.stereotype.Service;
 public class NewOrderServiceImpl implements INewOrderService {
     @Autowired
     private StringRedisTemplate localRedisTemplate;
+    private BoundHashOperations<String,Long,Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Autowired
     PublishChannel publishChannel;
     @Autowired
@@ -78,7 +87,16 @@ public class NewOrderServiceImpl implements INewOrderService {
      * @return
      */
     private boolean canAdd(Order order) {
-        return true;
+        Long lineId=order.getLineId();
+        Set<Long> orderIds = linePool.get(lineId);
+        for (Long orderId:
+             orderIds) {
+            Order order0 = orderPool.get(orderId);
+            if(order.similar(order0)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

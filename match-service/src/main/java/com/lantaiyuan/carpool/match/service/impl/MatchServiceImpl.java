@@ -1,7 +1,7 @@
 package com.lantaiyuan.carpool.match.service.impl;
 
-import com.lantaiyuan.carpool.common.RedisPoolKey;
-import com.lantaiyuan.carpool.common.UserStatusEnum;
+import com.lantaiyuan.carpool.common.constant.RedisPoolKey;
+import com.lantaiyuan.carpool.common.constant.UserStatusEnum;
 import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.domain.User;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 
@@ -72,8 +71,6 @@ public class MatchServiceImpl implements IMatchService {
             else {
                 //生成线路id
                 lineId = idService.genId();
-                ArrayList<Long> orderList= new ArrayList<Long>();
-                orderList.add(order.getOrderId());
             }
         }
         //有线路id，说明是加入某条线路
@@ -88,6 +85,7 @@ public class MatchServiceImpl implements IMatchService {
         user.setLineId(lineId);
         user.setOrderId(orderId);
         user.setUserStatus(UserStatusEnum.MATCH_STATUS.getValue());
+        userPool.put(user.getUserId(),user);
     }
 
     /**
@@ -97,10 +95,13 @@ public class MatchServiceImpl implements IMatchService {
      */
     private Line realMatch(Order order) {
         //获取附近行程
-//        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
-//        Circle within = new Circle(point,new Distance(100));
-//        GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);
-//        Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
+        Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
+        Circle within = new Circle(point,new Distance(100));
+        GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);
+        Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
+        while (it.hasNext()){
+            Long lineId=Long.parseLong(it.next().getContent().getName().split("-")[1]);
+        }
         return new Line();
     }
 }
