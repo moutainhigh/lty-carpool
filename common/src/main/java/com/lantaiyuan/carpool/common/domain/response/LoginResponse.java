@@ -18,7 +18,7 @@ import java.util.List;
 public class LoginResponse implements Validate,Serializable {
     private Integer status;
     private Order order;
-    private List<Line2User> lines;
+    private Line2User line;
 
     @Override
     public Boolean validate() {

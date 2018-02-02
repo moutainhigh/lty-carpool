@@ -1,19 +1,25 @@
 package com.lantaiyuan.carpool.login.service.impl;
 
+import com.lantaiyuan.carpool.common.RedisPoolKey;
 import com.lantaiyuan.carpool.common.UserStatusEnum;
 import com.lantaiyuan.carpool.common.dao.UserRepository;
+import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
 import com.lantaiyuan.carpool.common.domain.response.Line2User;
 import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
+import com.lantaiyuan.carpool.common.domain.response.Tour2User;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundGeoOperations;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author: Administrator$
@@ -26,50 +32,53 @@ import java.util.List;
 public class LoginServiceImpl implements ILoginService {
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    @Autowired
-    private UserRepository userRepository;
+    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
-        User user=getUser(loginRequest);
+        User user=userPool.get(loginRequest.getUserId());
         LoginResponse loginResponse =new LoginResponse();
+        Line2User line=null;
         if(user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
-            List<Line2User> lines = recommend(loginRequest);
-            loginResponse.setLines(lines);
-
+             line = recommend(user);
         }else if(user.getUserStatus().equals( UserStatusEnum.MATCH_STATUS.getValue())){
-            List<Line2User> lines = getLine(loginRequest);
-            loginResponse.setLines(lines);
+             line = getLine(user);
         }
+        loginResponse.setLine(line);
         return loginResponse;
-    }
-
-
-    /**
-     * 查询用户
-     * @param loginRequest
-     * @return
-     */
-    User getUser(LoginRequest loginRequest){
-        return  userRepository.findOne(loginRequest.getUserId());
     }
 
     /**
      * 推荐线路
-     * @param loginRequest
+     * @param user
      * @return
      */
-    List<Line2User> recommend(LoginRequest loginRequest){
-        List<Line2User> lines = new ArrayList<>();
-        return lines;
+    Line2User recommend(User user){
+        Line2User line = new Line2User();
+        return line;
     }
 
     /**
      * 获取用户当前所在处线路状况
-     * @param loginRequest
+     * @param user
      * @return
      */
-    List<Line2User> getLine(LoginRequest loginRequest){
-        List<Line2User> lines = new ArrayList<>();
-        return lines;
+    Line2User getLine(User user){
+        Line2User line = new Line2User();
+        Order order;
+        List<Tour2User> tour2UserList=new ArrayList<>();
+        Tour2User tour2User;
+        Set<Long> orderIds = linePool.get(user.getLineId());
+        for (Long orderId:
+                orderIds) {
+            order=orderPool.get(orderId);
+            tour2User=new Tour2User(order.getStartLongitude(),order.getStartLatitude(),order.getEndLongitude(),order.getEndLatitude());
+            tour2UserList.add(tour2User);
+        }
+        line.setLineId(user.getLineId());
+        line.setTours(tour2UserList);
+        return line;
     }
 }

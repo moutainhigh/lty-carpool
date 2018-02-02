@@ -1,5 +1,6 @@
 package com.lantaiyuan.carpool.match.service.impl;
 
+import com.lantaiyuan.carpool.common.RedisPoolKey;
 import com.lantaiyuan.carpool.common.UserStatusEnum;
 import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.Order;
@@ -30,12 +31,13 @@ import java.util.Set;
 public class MatchServiceImpl implements IMatchService {
     @Autowired
     private StringRedisTemplate localRedisTemplate;
+    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Autowired
     private IdService idService;
-    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps("car_pool_line");
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps("car_pool_order");
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps("car_pool_user");
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps("car_pool_tour");
+
 
     @Override
     public void matchCancel(CancelRequest cancelRequest) {

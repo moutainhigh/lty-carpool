@@ -22,4 +22,11 @@ public class Tour2User implements Validate,Serializable {
     public Boolean validate() {
         return true;
     }
+
+    public Tour2User(Double startLongitude, Double startLatitude, Double endLongitude, Double endLatitude) {
+        this.startLongitude = startLongitude;
+        this.startLatitude = startLatitude;
+        this.endLongitude = endLongitude;
+        this.endLatitude = endLatitude;
+    }
 }
