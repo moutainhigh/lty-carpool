@@ -6,6 +6,7 @@ import com.lantaiyuan.carpool.common.dao.OrderRepository;
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.NewOrderRequest;
+import com.lantaiyuan.carpool.common.service.IOrderService;
 import com.lantaiyuan.carpool.order.channel.PublishChannel;
 import com.lantaiyuan.carpool.order.service.INewOrderService;
 import com.robert.vesta.service.intf.IdService;
@@ -31,6 +32,9 @@ import java.util.Set;
 @ImportResource("spring/vesta-service-sample.xml")
 @Slf4j
 public class NewOrderServiceImpl implements INewOrderService {
+    final int MIN_ORDER_SIMILAR=80;
+    @Autowired
+    private IOrderService orderService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
     private BoundHashOperations<String,Long,Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
@@ -91,8 +95,8 @@ public class NewOrderServiceImpl implements INewOrderService {
         Set<Long> orderIds = linePool.get(lineId);
         for (Long orderId:
              orderIds) {
-            Order order0 = orderPool.get(orderId);
-            if(order.similar(order0)){
+            Order order1 = orderPool.get(orderId);
+            if(orderService.similarity(order,order1)>MIN_ORDER_SIMILAR){
                 return true;
             }
         }

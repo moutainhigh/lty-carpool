@@ -86,7 +86,6 @@ public class LoginServiceImpl implements ILoginService {
         return lines;
     }
     Line4User lineId2Line4User(Long lineId){
-
         Line4User line4User = new Line4User();
         Order order;
         List<Tour4User> tour4UserList =new ArrayList<>();
@@ -100,6 +99,7 @@ public class LoginServiceImpl implements ILoginService {
         }
         line4User.setLineId(lineId);
         line4User.setTours(tour4UserList);
+        //如果线路人数到达定值则存在车辆信息
         if(linePool.get(lineId).size()>MIN_PERSON){
             line4User.setLineStatus(LineStatusEnum.BUS_START.getValue());
             //TODO 设置bus信息

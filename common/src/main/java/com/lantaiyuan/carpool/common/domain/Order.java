@@ -68,9 +68,6 @@ public class Order implements Validate,Serializable {
 
     }
 
-    public boolean similar(Order order){
-        return true;
-    }
 
     @Override
     public Boolean validate() {
