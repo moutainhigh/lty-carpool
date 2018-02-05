@@ -1,34 +1,31 @@
-package com.lantaiyuan.carpool.websocket.service.impl;
+package com.lantaiyuan.carpool.common.service.impl;
 
+import com.lantaiyuan.carpool.common.constant.LineStatusEnum;
 import com.lantaiyuan.carpool.common.constant.RedisPoolKey;
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.response.Line4User;
+import com.lantaiyuan.carpool.common.domain.response.Tour4User;
 import com.lantaiyuan.carpool.common.service.ILineService;
-import com.lantaiyuan.carpool.websocket.service.IWebSocketService;
-import com.lantaiyuan.carpool.websocket.domain.WebSocketRequest;
-import com.lantaiyuan.carpool.websocket.domain.WebSocketResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundGeoOperations;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
  * @author: Administrator$
  * @project: lty-carpool$
- * @date: 2018/1/15$ 21:50$
+ * @date: 2018/2/5$ 16:45$
  * @description:
  */
 @Service
-@Slf4j
-public class WebSocketServiceImpl implements IWebSocketService {
-    @Autowired
-    private ILineService lineService;
+public class LineServiceImpl implements ILineService {
+    final static Integer MIN_PERSON=7;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
     private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
@@ -36,9 +33,25 @@ public class WebSocketServiceImpl implements IWebSocketService {
     private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
     private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Override
-    public WebSocketResponse getMatch(WebSocketRequest webSocketRequest) {
-        User user= userPool.get(webSocketRequest.getUserId());
-        Line4User line4User =lineService.lineId2Line4User(user.getLineId());
-        return new WebSocketResponse(user.getUserStatus(),line4User);
+    public Line4User lineId2Line4User(Long lineId) {
+        Line4User line4User = new Line4User();
+        Order order;
+        List<Tour4User> tour4UserList =new ArrayList<>();
+        Tour4User tour4User;
+        Set<Long> orderIds = linePool.get(lineId);
+        for (Long orderId:
+                orderIds) {
+            order=orderPool.get(orderId);
+            tour4User =new Tour4User(order.getStartLongitude(),order.getStartLatitude(),order.getEndLongitude(),order.getEndLatitude());
+            tour4UserList.add(tour4User);
+        }
+        line4User.setLineId(lineId);
+        line4User.setTours(tour4UserList);
+        //如果线路人数到达定值则存在车辆信息
+        if(linePool.get(lineId).size()>MIN_PERSON){
+            line4User.setLineStatus(LineStatusEnum.BUS_START.getValue());
+            //TODO 设置bus信息
+        }
+        return line4User;
     }
 }

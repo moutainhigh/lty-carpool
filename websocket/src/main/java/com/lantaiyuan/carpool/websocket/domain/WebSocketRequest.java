@@ -1,6 +1,7 @@
 package com.lantaiyuan.carpool.websocket.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @date: 2018/1/16$ 10:05$
  * @description:
  */
+@Data
 public class WebSocketRequest implements Validate,Serializable {
     String userId;
     long eventTime;

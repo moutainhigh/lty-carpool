@@ -16,6 +16,11 @@ public class WebSocketResponse implements Validate,Serializable {
     int status;
     Line4User line;
 
+    public WebSocketResponse(int status, Line4User line) {
+        this.status = status;
+        this.line = line;
+    }
+
     @Override
     public Boolean validate() {
         return true;

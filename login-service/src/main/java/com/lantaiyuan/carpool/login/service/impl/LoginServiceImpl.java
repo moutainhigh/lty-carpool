@@ -9,6 +9,7 @@ import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
 import com.lantaiyuan.carpool.common.domain.response.Line4User;
 import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
 import com.lantaiyuan.carpool.common.domain.response.Tour4User;
+import com.lantaiyuan.carpool.common.service.ILineService;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ import java.util.Set;
 @Slf4j
 public class LoginServiceImpl implements ILoginService {
     final static Double MIN_DISTANCE=2000d;
-    final static Integer MIN_PERSON=7;
+    @Autowired
+    private ILineService lineService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
     private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
@@ -69,7 +71,7 @@ public class LoginServiceImpl implements ILoginService {
         Line4User line4User;
         while (it.hasNext()){
             Long lineId=Long.parseLong(it.next().getContent().getName().split("-")[1]);
-            line4User=lineId2Line4User(lineId);
+            line4User=lineService.lineId2Line4User(lineId);
             lines.add(line4User);
         }
         return lines;
@@ -82,28 +84,7 @@ public class LoginServiceImpl implements ILoginService {
      */
     List<Line4User> getLine(User user){
         List<Line4User> lines = new ArrayList<>();
-        lines.add(lineId2Line4User(user.getLineId()));
+        lines.add(lineService.lineId2Line4User(user.getLineId()));
         return lines;
-    }
-    Line4User lineId2Line4User(Long lineId){
-        Line4User line4User = new Line4User();
-        Order order;
-        List<Tour4User> tour4UserList =new ArrayList<>();
-        Tour4User tour4User;
-        Set<Long> orderIds = linePool.get(lineId);
-        for (Long orderId:
-                orderIds) {
-            order=orderPool.get(orderId);
-            tour4User =new Tour4User(order.getStartLongitude(),order.getStartLatitude(),order.getEndLongitude(),order.getEndLatitude());
-            tour4UserList.add(tour4User);
-        }
-        line4User.setLineId(lineId);
-        line4User.setTours(tour4UserList);
-        //如果线路人数到达定值则存在车辆信息
-        if(linePool.get(lineId).size()>MIN_PERSON){
-            line4User.setLineStatus(LineStatusEnum.BUS_START.getValue());
-            //TODO 设置bus信息
-        }
-        return line4User;
     }
 }
