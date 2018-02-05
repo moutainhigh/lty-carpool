@@ -15,5 +15,5 @@ public interface IOrderService {
      * @param order1
      * @return
      */
-     int similarity(Order order0, Order order1);
+     double similarity(Order order0, Order order1);
 }

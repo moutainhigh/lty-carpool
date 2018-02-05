@@ -32,7 +32,7 @@ import java.util.Set;
 @ImportResource("spring/vesta-service-sample.xml")
 @Slf4j
 public class NewOrderServiceImpl implements INewOrderService {
-    final int MIN_ORDER_SIMILAR=80;
+    final double MIN_ORDER_SIMILAR=80d;
     @Autowired
     private IOrderService orderService;
     @Autowired

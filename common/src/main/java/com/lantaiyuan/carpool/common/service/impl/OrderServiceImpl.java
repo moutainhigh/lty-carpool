@@ -2,6 +2,7 @@ package com.lantaiyuan.carpool.common.service.impl;
 
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.service.IOrderService;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,8 +14,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl implements IOrderService {
     @Override
-    public int similarity(Order order0, Order order1) {
+    public double similarity(Order order0, Order order1) {
+        Point startPoint0=new Point(order0.getStartLongitude(),order0.getStartLatitude());
+        Point endPoint0=new Point(order0.getEndLongitude(),order0.getEndLatitude());
+        Point startPoint1=new Point(order1.getStartLongitude(),order1.getStartLatitude());
+        Point endPoint1=new Point(order1.getEndLongitude(),order1.getEndLatitude());
+        double slope0 = getSlope(startPoint0,endPoint0);
+        double slope1=getSlope(startPoint1,endPoint1);
+        //求弧度tan值，政府无穷
+        double tanA=(slope1-slope0)/(1+slope1*slope0);
+        //求弧度值,0到pi*100 TODO相似度计算不完整
+        return Math.atan(tanA)*100;
+    }
 
-        return 99;
+    /**
+     * 求直线斜率
+     * @param point0
+     * @param point1
+     * @return
+     */
+     double getSlope(Point point0,Point point1){
+        if(point1.getX()==point0.getX()){
+            return Double.MAX_VALUE;
+        }else {
+            return (point1.getY()-point0.getY())/(point1.getX()-point0.getX());
+        }
     }
 }

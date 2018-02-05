@@ -2,7 +2,6 @@ package com.lantaiyuan.carpool.match.service.impl;
 
 import com.lantaiyuan.carpool.common.constant.RedisPoolKey;
 import com.lantaiyuan.carpool.common.constant.UserStatusEnum;
-import com.lantaiyuan.carpool.common.domain.Line;
 import com.lantaiyuan.carpool.common.domain.Order;
 import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.CancelRequest;
@@ -17,7 +16,6 @@ import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -96,7 +94,7 @@ public class MatchServiceImpl implements IMatchService {
      * @return
      */
     private Long realMatch(Order order) {
-        int maxSimilarity=0;
+        double maxSimilarity=0;
         Long similarOrderId=0L;
         //获取附近行程
         Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
@@ -105,7 +103,7 @@ public class MatchServiceImpl implements IMatchService {
         Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
         while (it.hasNext()){
             Long orderId=Long.parseLong(it.next().getContent().getName().split("-")[0]);
-            int similarity=orderService.similarity(order,orderPool.get(orderId));
+            double similarity=orderService.similarity(order,orderPool.get(orderId));
             if(similarity>maxSimilarity){
                 maxSimilarity=similarity;
                 similarOrderId=orderId;
