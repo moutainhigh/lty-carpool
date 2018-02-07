@@ -37,10 +37,6 @@ public class NewOrderServiceImpl implements INewOrderService {
     private IOrderService orderService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    private BoundHashOperations<String,Long,Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Autowired
     PublishChannel publishChannel;
     @Autowired
@@ -91,6 +87,10 @@ public class NewOrderServiceImpl implements INewOrderService {
      * @return
      */
     private boolean canAdd(Order order) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         Long lineId=order.getLineId();
         Set<Long> orderIds = linePool.get(lineId);
         for (Long orderId:

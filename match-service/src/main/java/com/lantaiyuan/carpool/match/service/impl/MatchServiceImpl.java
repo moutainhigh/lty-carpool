@@ -32,16 +32,16 @@ public class MatchServiceImpl implements IMatchService {
     private IOrderService orderService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Autowired
     private IdService idService;
 
 
     @Override
     public void matchCancel(CancelRequest cancelRequest) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user= userPool.get(cancelRequest.getUserId());
         Long lineId=user.getLineId();
         Long orderId=user.getOrderId();
@@ -56,6 +56,10 @@ public class MatchServiceImpl implements IMatchService {
 
     @Override
     public void matchOrder(Order order) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         //获取起始点
         Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
         Long orderId=order.getOrderId();
@@ -94,6 +98,10 @@ public class MatchServiceImpl implements IMatchService {
      * @return
      */
     private Long realMatch(Order order) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         double maxSimilarity=0;
         Long similarOrderId=0L;
         //获取附近行程

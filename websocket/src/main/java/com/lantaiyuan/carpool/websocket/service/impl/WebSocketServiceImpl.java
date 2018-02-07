@@ -31,12 +31,12 @@ public class WebSocketServiceImpl implements IWebSocketService {
     private ILineService lineService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
     @Override
     public WebSocketResponse getMatch(WebSocketRequest webSocketRequest) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user= userPool.get(webSocketRequest.getUserId());
         Line4User line4User =lineService.lineId2Line4User(user.getLineId());
         return new WebSocketResponse(user.getUserStatus(),line4User);

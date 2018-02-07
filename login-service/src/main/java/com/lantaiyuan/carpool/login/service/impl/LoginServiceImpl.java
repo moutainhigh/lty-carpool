@@ -39,12 +39,13 @@ public class LoginServiceImpl implements ILoginService {
     private ILineService lineService;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
+
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user=userPool.get(loginRequest.getUserId());
         LoginResponse loginResponse =new LoginResponse();
         List<Line4User> lines=null;
@@ -63,6 +64,10 @@ public class LoginServiceImpl implements ILoginService {
      * @return
      */
     List<Line4User> recommend(LoginRequest loginRequest){
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         Point point = new Point(loginRequest.getLongitude(), loginRequest.getLatitude());
         Circle within = new Circle(point,new Distance(MIN_DISTANCE));
         GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);

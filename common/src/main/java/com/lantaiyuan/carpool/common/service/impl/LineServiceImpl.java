@@ -25,30 +25,31 @@ import java.util.Set;
  */
 @Service
 public class LineServiceImpl implements ILineService {
-    final static Integer MIN_PERSON=7;
+    final static Integer MIN_PERSON = 7;
     @Autowired
     private StringRedisTemplate localRedisTemplate;
-    private BoundHashOperations<String,Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-    private BoundHashOperations<String, Long, Order> orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-    private BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-    private BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
+
     @Override
     public Line4User lineId2Line4User(Long lineId) {
+        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
+        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         Line4User line4User = new Line4User();
         Order order;
-        List<Tour4User> tour4UserList =new ArrayList<>();
+        List<Tour4User> tour4UserList = new ArrayList<>();
         Tour4User tour4User;
         Set<Long> orderIds = linePool.get(lineId);
-        for (Long orderId:
+        for (Long orderId :
                 orderIds) {
-            order=orderPool.get(orderId);
-            tour4User =new Tour4User(order.getStartLongitude(),order.getStartLatitude(),order.getEndLongitude(),order.getEndLatitude());
+            order = orderPool.get(orderId);
+            tour4User = new Tour4User(order.getStartLongitude(), order.getStartLatitude(), order.getEndLongitude(), order.getEndLatitude());
             tour4UserList.add(tour4User);
         }
         line4User.setLineId(lineId);
         line4User.setTours(tour4UserList);
         //如果线路人数到达定值则存在车辆信息
-        if(linePool.get(lineId).size()>MIN_PERSON){
+        if (linePool.get(lineId).size() > MIN_PERSON) {
             line4User.setLineStatus(LineStatusEnum.BUS_START.getValue());
             //TODO 设置bus信息
         }

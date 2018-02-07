@@ -26,8 +26,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CancelServiceImpl implements ICancelService {
     @Autowired
-    private StringRedisTemplate localRedisTemplate;
-    @Autowired
     PublishChannel publishChannel;
     @Autowired
     private OrderRepository orderRepository;
