@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.websocket.client;
+package client;
 
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;

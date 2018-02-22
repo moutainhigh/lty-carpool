@@ -56,6 +56,7 @@ public class NewOrderServiceImpl implements INewOrderService {
              * 如果订单合适加入
              */
             if (canAdd(order)) {
+                //保存订单到sql
                 saveOrder2SQL(order);
                 Message<Order> msg = MessageBuilder.withPayload(order).setHeader("contentType", order.getClass().getCanonicalName()).build();
                 publishChannel.publish().send(msg);

@@ -35,6 +35,7 @@ public class CancelServiceImpl implements ICancelService {
     @Override
     public int cancel(CancelRequest cancelRequest) {
         if(canCancel(cancelRequest)){
+            //更新sql订单信息
             updateOrder(cancelRequest);
             Message<CancelRequest> msg = MessageBuilder.withPayload(cancelRequest).setHeader("contentType", cancelRequest.getClass().getCanonicalName()).build();
             publishChannel.publish().send(msg);

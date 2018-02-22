@@ -18,6 +18,13 @@ public class ChargeRequest implements Validate,Serializable {
     private Double endPlaceLon;
     private Double endPlaceLat;
     private String userId;
+    /**
+     * 出行时间
+     */
+    private Long startTime;
+    /**
+     * 查询时间
+     */
     private Long eventTime;
 
     @Override

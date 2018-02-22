@@ -19,15 +19,15 @@ public class Tour4User implements Validate,Serializable {
     private Double endLongitude;
     private Double endLatitude;
 
-    @Override
-    public boolean validate() {
-        return true;
-    }
-
     public Tour4User(double startLongitude, double startLatitude, double endLongitude, double endLatitude) {
         this.startLongitude = startLongitude;
         this.startLatitude = startLatitude;
         this.endLongitude = endLongitude;
         this.endLatitude = endLatitude;
+    }
+
+    @Override
+    public boolean validate() {
+        return true;
     }
 }

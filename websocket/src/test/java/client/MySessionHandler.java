@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.websocket.client;
+package client;
 
 import com.lantaiyuan.carpool.common.constant.ResultObject;
 import com.lantaiyuan.carpool.websocket.domain.WebSocketRequest;

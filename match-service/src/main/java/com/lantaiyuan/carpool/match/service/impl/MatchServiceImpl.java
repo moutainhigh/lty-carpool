@@ -35,7 +35,10 @@ public class MatchServiceImpl implements IMatchService {
     @Autowired
     private IdService idService;
 
-
+    /**
+     * 取消撮合
+     * @param cancelRequest
+     */
     @Override
     public void matchCancel(CancelRequest cancelRequest) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
@@ -54,6 +57,10 @@ public class MatchServiceImpl implements IMatchService {
         userPool.delete(user.getUserId());
     }
 
+    /**
+     * 撮合订单
+     * @param order
+     */
     @Override
     public void matchOrder(Order order) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
@@ -93,17 +100,17 @@ public class MatchServiceImpl implements IMatchService {
     }
 
     /**
-     * 撮合合适的线路
+     * 实际撮合合适的线路
      * @param order
      * @return
      */
-    private Long realMatch(Order order) {
+    private long realMatch(Order order) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         double maxSimilarity=0;
-        Long similarOrderId=0L;
+        long similarOrderId=0L;
         //获取附近行程
         Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
         Circle within = new Circle(point,new Distance(100));
