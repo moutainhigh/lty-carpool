@@ -9,9 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author: Administrator$
@@ -36,5 +40,26 @@ public class WebSocketController {
 //        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
 //        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
+    }
+
+    @Scheduled(fixedRate = 1000)
+    @SendTo("/topic/track")
+    public ResultObject  track() {
+//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
+//        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
+        log.error("test");
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
+
+    }
+
+
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+    @Autowired
+    private SimpMessagingTemplate broker;
+    @Scheduled(fixedRate = 1000)
+    public void run() {
+        String time = LocalTime.now().format(TIME_FORMAT);
+        log.info("Time broadcast: {}", time);
+        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),time));
     }
 }
