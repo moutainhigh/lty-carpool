@@ -26,7 +26,7 @@ public class LineRestController {
 
     @ApiOperation(value="根据线路id，查询线路信息",produces = "application/json")
     @RequestMapping(value = "/api/line/{id}", method = RequestMethod.GET)
-    public ResultObject index(@PathVariable("id") Long id) {
+    public ResultObject index(@PathVariable("id") long id) {
         Line line = lineRepository.findOne(id);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), line);
         if(line ==null){
@@ -48,7 +48,7 @@ public class LineRestController {
     }
     @ApiOperation(value="根据线路id，删除线路信息",produces = "application/json")
     @RequestMapping(value = "/api/line/{id}", method = RequestMethod.DELETE)
-    public ResultObject modifyLine(@PathVariable("id") Long id) {
+    public ResultObject modifyLine(@PathVariable("id") long id) {
         lineRepository.delete(id);
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue());
     }

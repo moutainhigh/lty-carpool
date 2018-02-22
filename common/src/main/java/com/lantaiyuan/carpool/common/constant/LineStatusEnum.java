@@ -13,7 +13,7 @@ public enum LineStatusEnum {
     @Getter
     private Integer value;
 
-    LineStatusEnum(Integer value) {
+    LineStatusEnum(int value) {
         this.value = value;
     }
 }

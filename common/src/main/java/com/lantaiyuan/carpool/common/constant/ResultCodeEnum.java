@@ -13,7 +13,7 @@ public enum ResultCodeEnum {
     @Getter
     private Integer value;
 
-    ResultCodeEnum(Integer value) {
+    ResultCodeEnum(int value) {
         this.value = value;
     }
 

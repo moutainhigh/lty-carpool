@@ -14,5 +14,5 @@ public interface IChargeService {
      * @param chargeRequest
      * @return
      */
-    Double charge(ChargeRequest chargeRequest);
+    double charge(ChargeRequest chargeRequest);
 }

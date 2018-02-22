@@ -19,11 +19,6 @@ public class ChargeApplication {
         Object[] objects= new Object[2];
         objects[0] = CommonApplication.class;
         objects[1] = ChargeApplication.class;
-        ApplicationContext ctx =SpringApplication.run(objects, args);
-        String[] beanNames =  ctx.getBeanDefinitionNames();
-        log.info("所以beanNames个数："+beanNames.length);
-        for(String bn:beanNames){
-            log.info(bn);
-        }
+        SpringApplication.run(objects, args);
     }
 }

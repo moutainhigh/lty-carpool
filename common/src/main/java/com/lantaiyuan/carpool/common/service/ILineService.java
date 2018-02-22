@@ -9,5 +9,5 @@ import com.lantaiyuan.carpool.common.domain.response.Line4User;
  * @description:
  */
 public interface ILineService {
-    Line4User lineId2Line4User(Long lineId);
+    Line4User lineId2Line4User(long lineId);
 }

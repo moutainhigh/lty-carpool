@@ -1,6 +1,7 @@
 package com.lantaiyuan.carpool.common.domain.response;
 
 import com.lantaiyuan.carpool.common.Validate;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,11 +20,11 @@ public class Tour4User implements Validate,Serializable {
     private Double endLatitude;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 
-    public Tour4User(Double startLongitude, Double startLatitude, Double endLongitude, Double endLatitude) {
+    public Tour4User(double startLongitude, double startLatitude, double endLongitude, double endLatitude) {
         this.startLongitude = startLongitude;
         this.startLatitude = startLatitude;
         this.endLongitude = endLongitude;

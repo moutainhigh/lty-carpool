@@ -30,7 +30,7 @@ public class LineServiceImpl implements ILineService {
     private StringRedisTemplate localRedisTemplate;
 
     @Override
-    public Line4User lineId2Line4User(Long lineId) {
+    public Line4User lineId2Line4User(long lineId) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);

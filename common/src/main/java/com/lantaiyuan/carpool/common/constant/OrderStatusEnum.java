@@ -14,7 +14,7 @@ public enum OrderStatusEnum {
     @Getter
     private Integer value;
 
-    OrderStatusEnum(Integer value) {
+    OrderStatusEnum(int value) {
         this.value = value;
     }
 }

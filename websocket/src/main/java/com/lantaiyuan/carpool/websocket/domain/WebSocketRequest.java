@@ -17,7 +17,7 @@ public class WebSocketRequest implements Validate,Serializable {
     long eventTime;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

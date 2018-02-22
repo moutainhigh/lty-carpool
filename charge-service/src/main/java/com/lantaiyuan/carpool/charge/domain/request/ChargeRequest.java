@@ -21,7 +21,7 @@ public class ChargeRequest implements Validate,Serializable {
     private Long eventTime;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

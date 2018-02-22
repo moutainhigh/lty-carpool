@@ -3,6 +3,7 @@ package com.lantaiyuan.carpool.common.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Table(name="carpool_user")
 @Entity
 @Data
+@NoArgsConstructor
 public class User implements Validate,Serializable {
     @Id
     private  String userId;
@@ -23,11 +25,9 @@ public class User implements Validate,Serializable {
     private Long orderId;
     private Long lineId;
 
-    public User() {
-    }
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

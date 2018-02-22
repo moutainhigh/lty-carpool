@@ -2,6 +2,7 @@ package com.lantaiyuan.carpool.common.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Table(name="carpool_order")
 @Entity
 @Data
+@NoArgsConstructor
 public class Order implements Validate,Serializable {
     @Id
     private Long orderId;
@@ -64,13 +66,10 @@ public class Order implements Validate,Serializable {
      */
     private Integer orderStatus;
 
-    public Order() {
-
-    }
 
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         if(!alreadyPaid){
             if(lineId==0){
                 return false;

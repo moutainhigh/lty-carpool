@@ -19,7 +19,7 @@ public enum UserStatusEnum {
     @Getter
     private Integer value;
 
-    UserStatusEnum(Integer value) {
+    UserStatusEnum(int value) {
         this.value = value;
     }
 }

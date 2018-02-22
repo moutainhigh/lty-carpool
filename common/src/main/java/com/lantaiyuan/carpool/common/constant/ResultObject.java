@@ -21,16 +21,17 @@ public class ResultObject {
      * 返回异常信息
      */
     private String massage;
-    public ResultObject(Integer code) {
+
+    public ResultObject(int code) {
         this.code = code;
     }
 
-    public ResultObject(Integer code, Object data) {
+    public ResultObject(int code, Object data) {
         this.code = code;
         this.data = data;
     }
 
-    public ResultObject(Integer code, String massage) {
+    public ResultObject(int code, String massage) {
         this.code = code;
         this.massage = massage;
     }

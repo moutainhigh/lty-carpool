@@ -2,6 +2,7 @@ package com.lantaiyuan.carpool.common.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Table(name="carpool_driver")
 @Entity
 @Data
+@NoArgsConstructor
 public class Driver implements Validate,Serializable {
     @Id
     private String driverId;
@@ -22,11 +24,8 @@ public class Driver implements Validate,Serializable {
     private Integer driverJudgement;
     private String driverPhoneNumber;
 
-    public Driver() {
-    }
-
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

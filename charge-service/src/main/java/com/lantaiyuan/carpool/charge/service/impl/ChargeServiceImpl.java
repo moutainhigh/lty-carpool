@@ -20,7 +20,7 @@ public class ChargeServiceImpl implements IChargeService {
      * @return
      */
     @Override
-    public Double charge(ChargeRequest chargeRequest) {
+    public double charge(ChargeRequest chargeRequest) {
         return 0d;
     }
 }

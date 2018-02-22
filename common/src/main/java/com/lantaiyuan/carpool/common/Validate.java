@@ -11,5 +11,5 @@ public interface Validate {
      * 校验数据
      * @return
      */
-    Boolean validate();
+    boolean validate();
 }

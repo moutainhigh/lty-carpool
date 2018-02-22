@@ -21,7 +21,7 @@ public class LoginResponse implements Validate,Serializable {
     private List<Line4User> lines;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

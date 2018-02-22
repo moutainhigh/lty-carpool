@@ -22,7 +22,7 @@ public class WebSocketResponse implements Validate,Serializable {
     }
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

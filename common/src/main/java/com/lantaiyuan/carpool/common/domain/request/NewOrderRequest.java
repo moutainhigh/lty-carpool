@@ -15,14 +15,14 @@ import java.io.Serializable;
  */
 @Data
 public class NewOrderRequest  implements Validate,Serializable {
-    String userId;
-    Long eventTime;
-    Double longitude;
-    Double latitude;
-    Order order;
+    private String userId;
+    private Long eventTime;
+    private Double longitude;
+    private Double latitude;
+    private Order order;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         if(!order.validate()){
             return false;
         }

@@ -2,6 +2,7 @@ package com.lantaiyuan.carpool.common.domain;
 
 import com.lantaiyuan.carpool.common.Validate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,17 +16,16 @@ import java.io.Serializable;
 @Table(name="carpool_bus")
 @Entity
 @Data
+@NoArgsConstructor
 public class Bus  implements Validate,Serializable {
     @Id
     private String busId;
     private Integer departBusType;
     private Integer departBusSeats;
     private String busPlateNumber;
-    public Bus() {
-    }
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

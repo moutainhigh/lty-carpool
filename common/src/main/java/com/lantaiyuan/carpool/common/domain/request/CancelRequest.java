@@ -13,14 +13,14 @@ import java.io.Serializable;
  */
 @Data
 public class CancelRequest implements Validate,Serializable {
-    String userId;
-    Long eventTime;
-    Integer cancelCode;
-    Double longitude;
-    Double latitude;
+    private String userId;
+    private Long eventTime;
+    private Integer cancelCode;
+    private Double longitude;
+    private Double latitude;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

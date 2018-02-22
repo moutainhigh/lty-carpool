@@ -26,7 +26,7 @@ public class Line4User implements Validate,Serializable {
     private String busId;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }

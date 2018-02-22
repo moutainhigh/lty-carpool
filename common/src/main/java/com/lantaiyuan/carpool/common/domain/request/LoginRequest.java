@@ -19,7 +19,7 @@ public class LoginRequest implements Validate,Serializable {
     private Double latitude;
 
     @Override
-    public Boolean validate() {
+    public boolean validate() {
         return true;
     }
 }
