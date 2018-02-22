@@ -15,7 +15,7 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
         session.subscribe("/topic/track", this);
-        session.send("/app/match", new WebSocketRequest().toString().getBytes());
+        session.send("/app/match", new WebSocketRequest());
         log.info("New session: {}", session.getSessionId());
     }
 
