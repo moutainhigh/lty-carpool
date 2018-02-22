@@ -42,16 +42,6 @@ public class WebSocketController {
         return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
     }
 
-    @Scheduled(fixedRate = 1000)
-    @SendTo("/topic/track")
-    public ResultObject  track() {
-//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
-//        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
-        log.error("test");
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
-
-    }
-
 
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
     @Autowired

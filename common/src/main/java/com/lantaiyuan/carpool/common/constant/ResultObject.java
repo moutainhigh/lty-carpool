@@ -1,11 +1,13 @@
 package com.lantaiyuan.carpool.common.constant;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  */
 @Data
+@NoArgsConstructor
 public class ResultObject {
     /**
      * 返回码
@@ -19,7 +21,6 @@ public class ResultObject {
      * 返回异常信息
      */
     private String massage;
-
     public ResultObject(Integer code) {
         this.code = code;
     }
