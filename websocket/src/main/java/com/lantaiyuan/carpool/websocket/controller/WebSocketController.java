@@ -29,15 +29,16 @@ public class WebSocketController {
     @MessageMapping(value="/match")
     @SendTo("/topic/track")
     public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
-        this.webSocketRequest = webSocketRequest;
-        if(!webSocketRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
-        }
-        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
+//        this.webSocketRequest = webSocketRequest;
+//        if(!webSocketRequest.validate()){
+//            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+//        }
+//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
+//        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
     }
 
-    @Scheduled(fixedRate = 1000)
+//    @Scheduled(fixedRate = 1000)
     @SendTo("/topic/track")
     public ResultObject  track() {
         WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
