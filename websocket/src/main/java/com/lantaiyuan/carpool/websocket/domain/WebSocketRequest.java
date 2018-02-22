@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class WebSocketRequest implements Validate,Serializable {
     String userId;
-    long eventTime;
+    Long eventTime;
 
     @Override
     public boolean validate() {
