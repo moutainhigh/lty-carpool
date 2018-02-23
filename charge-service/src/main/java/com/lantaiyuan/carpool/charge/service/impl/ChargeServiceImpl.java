@@ -5,6 +5,8 @@ import com.lantaiyuan.carpool.charge.service.IChargeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 /**
  * @author: Administrator$
  * @project: lty-carpool$
@@ -20,7 +22,7 @@ public class ChargeServiceImpl implements IChargeService {
      * @return
      */
     @Override
-    public double charge(ChargeRequest chargeRequest) {
-        return 0d;
+    public BigDecimal charge(ChargeRequest chargeRequest) {
+        return new BigDecimal(Double.toString(0d));
     }
 }

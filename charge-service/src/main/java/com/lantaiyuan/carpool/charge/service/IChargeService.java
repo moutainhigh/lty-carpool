@@ -2,6 +2,8 @@ package com.lantaiyuan.carpool.charge.service;
 
 import com.lantaiyuan.carpool.charge.domain.request.ChargeRequest;
 
+import java.math.BigDecimal;
+
 /**
  * @author: Administrator$
  * @project: lty-carpool$
@@ -14,5 +16,5 @@ public interface IChargeService {
      * @param chargeRequest
      * @return
      */
-    double charge(ChargeRequest chargeRequest);
+    BigDecimal charge(ChargeRequest chargeRequest);
 }

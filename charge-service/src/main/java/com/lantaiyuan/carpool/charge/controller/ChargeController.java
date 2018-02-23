@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 /**
  * @author: Administrator$
  * @project: lty-carpool$
@@ -29,7 +31,7 @@ public class ChargeController {
             rs.setMassage("请检查参数");
             return rs;
         }
-        double r = chargeService.charge(chargeRequest);
+        BigDecimal r = chargeService.charge(chargeRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);
         return ret;
     }
