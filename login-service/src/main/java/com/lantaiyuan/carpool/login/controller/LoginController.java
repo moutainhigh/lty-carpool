@@ -26,7 +26,9 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResultObject login(@RequestBody LoginRequest loginRequest) {
         if(!loginRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            rs.setMassage("请检查参数");
+            return rs;
         }
         LoginResponse loginResponse = loginService.getUserStatusOrRecommend(loginRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), loginResponse);

@@ -25,7 +25,9 @@ public class ChargeController {
     @RequestMapping(value = "/charge", method = RequestMethod.POST)
     public ResultObject charge(@RequestBody ChargeRequest chargeRequest) {
         if(!chargeRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            rs.setMassage("请检查参数");
+            return rs;
         }
         double r = chargeService.charge(chargeRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);

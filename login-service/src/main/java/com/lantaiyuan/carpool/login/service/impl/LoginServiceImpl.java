@@ -34,7 +34,7 @@ import java.util.Set;
 @Service
 @Slf4j
 public class LoginServiceImpl implements ILoginService {
-    final static Double MIN_DISTANCE=2000d;
+    final static double MIN_DISTANCE=2000d;
     @Autowired
     private ILineService lineService;
     @Autowired

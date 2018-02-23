@@ -35,7 +35,9 @@ public class WebSocketController {
     public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
 //        this.webSocketRequest = webSocketRequest;
 //        if(!webSocketRequest.validate()){
-//            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+//        ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+//        rs.setMassage("请检查参数");
+//        return rs;
 //        }
 //        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
 //        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
@@ -48,6 +50,8 @@ public class WebSocketController {
     private SimpMessagingTemplate broker;
     @Scheduled(fixedRate = 1000)
     public void run() {
+//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
+//        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response));
         String time = LocalTime.now().format(TIME_FORMAT);
         log.info("Time broadcast: {}", time);
         broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),time));

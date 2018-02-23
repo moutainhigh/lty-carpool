@@ -22,7 +22,9 @@ public class CancelController {
     @RequestMapping(value = "/order/cancel", method = RequestMethod.POST)
     public ResultObject cancel(@RequestBody CancelRequest cancelRequest) {
         if(!cancelRequest.validate()){
-            return new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+            rs.setMassage("请检查参数");
+            return rs;
         }
         int r = cancelService.cancel(cancelRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);
