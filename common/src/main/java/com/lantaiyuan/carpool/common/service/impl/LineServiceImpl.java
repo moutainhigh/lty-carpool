@@ -45,6 +45,9 @@ public class LineServiceImpl implements ILineService {
         List<Tour4User> tour4UserList = new ArrayList<>();
         Tour4User tour4User;
         Set<Long> orderIds = linePool.get(lineId);
+        if(orderIds==null){
+            return null;
+        }
         for (Long orderId :
                 orderIds) {
             order = orderPool.get(orderId);

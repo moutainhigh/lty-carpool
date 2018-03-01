@@ -46,8 +46,8 @@ public class MatchServiceImpl implements IMatchService {
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user= userPool.get(cancelRequest.getUserId());
-        Long lineId=user.getLineId();
-        Long orderId=user.getOrderId();
+        long lineId=user.getLineId();
+        long orderId=user.getOrderId();
         linePool.get(lineId).remove(orderId);
         if(linePool.get(lineId).size()==0){
             linePool.delete(lineId);
