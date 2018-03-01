@@ -8,7 +8,6 @@ import com.lantaiyuan.carpool.common.domain.User;
 import com.lantaiyuan.carpool.common.domain.request.LoginRequest;
 import com.lantaiyuan.carpool.common.domain.response.Line4User;
 import com.lantaiyuan.carpool.common.domain.response.LoginResponse;
-import com.lantaiyuan.carpool.common.domain.response.Tour4User;
 import com.lantaiyuan.carpool.common.service.ILineService;
 import com.lantaiyuan.carpool.login.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;

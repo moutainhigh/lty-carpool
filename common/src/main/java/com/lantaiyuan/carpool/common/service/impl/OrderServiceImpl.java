@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderServiceImpl implements IOrderService {
+    /**
+     * 求两个订单的相似度
+     * @param order0
+     * @param order1
+     * @return
+     */
     @Override
     public double similarity(Order order0, Order order1) {
         Point startPoint0=new Point(order0.getStartLongitude(),order0.getStartLatitude());
@@ -21,7 +27,7 @@ public class OrderServiceImpl implements IOrderService {
         Point endPoint1=new Point(order1.getEndLongitude(),order1.getEndLatitude());
         double slope0 = getSlope(startPoint0,endPoint0);
         double slope1=getSlope(startPoint1,endPoint1);
-        //求弧度tan值，政府无穷
+        //求弧度tan值，正负无穷
         double tanA=(slope1-slope0)/(1+slope1*slope0);
         //求弧度值,0到pi*100 TODO相似度计算不完整
         return Math.atan(tanA)*100;

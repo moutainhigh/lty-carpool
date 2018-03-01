@@ -29,6 +29,11 @@ public class LineServiceImpl implements ILineService {
     @Autowired
     private StringRedisTemplate localRedisTemplate;
 
+    /**
+     * 根据线路id求线路包含的信息，用于返回给客户端
+     * @param lineId
+     * @return
+     */
     @Override
     public Line4User lineId2Line4User(long lineId) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
