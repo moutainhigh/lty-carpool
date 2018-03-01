@@ -93,7 +93,10 @@ public class NewOrderServiceImpl implements INewOrderService {
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         Long lineId=order.getLineId();
-        Set<Long> orderIds = linePool.get(lineId);
+        Set<Long> orderIds = linePool.get(lineId.toString());
+        if(orderIds==null){
+            return false;
+        }
         for (Long orderId:
              orderIds) {
             Order order1 = orderPool.get(orderId);

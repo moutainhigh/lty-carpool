@@ -41,14 +41,14 @@ public class LoginServiceImpl implements ILoginService {
 
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
+        LoginResponse loginResponse =new LoginResponse();
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user=userPool.get(loginRequest.getUserId());
-        LoginResponse loginResponse =new LoginResponse();
         List<Line4User> lines=null;
-        if(user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
+        if(user==null||user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
              lines = recommend(loginRequest);
         }else if(user.getUserStatus().equals( UserStatusEnum.MATCH_STATUS.getValue())){
              lines = getLine(user);
