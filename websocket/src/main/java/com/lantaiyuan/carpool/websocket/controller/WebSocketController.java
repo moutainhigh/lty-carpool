@@ -33,15 +33,15 @@ public class WebSocketController {
     @MessageMapping(value="/match")
     @SendTo("/topic/track")
     public ResultObject match(WebSocketRequest webSocketRequest) throws Exception {
-//        this.webSocketRequest = webSocketRequest;
-//        if(!webSocketRequest.validate()){
-//        ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
-//        rs.setMassage("请检查参数");
-//        return rs;
-//        }
-//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
-//        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
-        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
+        this.webSocketRequest = webSocketRequest;
+        if(!webSocketRequest.validate()){
+        ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
+        rs.setMassage("请检查参数");
+        return rs;
+        }
+        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
+        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response);
+//        return new ResultObject(ResultCodeEnum.SUCCESS.getValue(),"test");
     }
 
 
@@ -50,10 +50,14 @@ public class WebSocketController {
     private SimpMessagingTemplate broker;
     @Scheduled(fixedRate = 1000)
     public void run() {
-//        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
-//        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response));
-        String time = LocalTime.now().format(TIME_FORMAT);
-        log.info("Time broadcast: {}", time);
-        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),time));
+        //在用户请求到达之前webSocketRequest为空
+        if(webSocketRequest==null){
+            return;
+        }
+        WebSocketResponse response =webSocketService.getMatch(webSocketRequest);
+        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),response));
+//        String time = LocalTime.now().format(TIME_FORMAT);
+//        log.info("Time broadcast: {}", time);
+//        broker.convertAndSend("/topic/track", new ResultObject(ResultCodeEnum.SUCCESS.getValue(),time));
     }
 }

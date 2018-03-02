@@ -36,6 +36,9 @@ public class WebSocketServiceImpl implements IWebSocketService {
     @Override
     public WebSocketResponse getMatch(WebSocketRequest webSocketRequest) {
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
+        if(webSocketRequest.getUserId()==null){
+            return new WebSocketResponse(0,new Line4User());
+        }
         User user= userPool.get(webSocketRequest.getUserId());
         Line4User line4User =lineService.lineId2Line4User(user.getLineId());
         return new WebSocketResponse(user.getUserStatus(),line4User);
