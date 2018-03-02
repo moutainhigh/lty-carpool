@@ -12,10 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundGeoOperations;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -29,14 +31,11 @@ import java.util.Set;
 public class WebSocketServiceImpl implements IWebSocketService {
     @Autowired
     private ILineService lineService;
-    @Autowired
-    private StringRedisTemplate localRedisTemplate;
+    @Resource(name="redisTemplate")
+    private RedisTemplate localRedisTemplate;
     @Override
     public WebSocketResponse getMatch(WebSocketRequest webSocketRequest) {
-        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user= userPool.get(webSocketRequest.getUserId());
         Line4User line4User =lineService.lineId2Line4User(user.getLineId());
         return new WebSocketResponse(user.getUserStatus(),line4User);

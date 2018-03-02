@@ -16,6 +16,7 @@ import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -30,8 +31,8 @@ public class MatchServiceImpl implements IMatchService {
     final int MIN_ORDER_SIMILAR=80;
     @Autowired
     private IOrderService orderService;
-    @Autowired
-    private StringRedisTemplate localRedisTemplate;
+    @Resource(name="redisTemplate")
+    private RedisTemplate localRedisTemplate;
     @Autowired
     private IdService idService;
 

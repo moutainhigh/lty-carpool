@@ -10,9 +10,11 @@ import com.lantaiyuan.carpool.common.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundGeoOperations;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +28,8 @@ import java.util.Set;
 @Service
 public class LineServiceImpl implements ILineService {
     final static Integer MIN_PERSON = 7;
-    @Autowired
-    private StringRedisTemplate localRedisTemplate;
+    @Resource(name="redisTemplate")
+    private RedisTemplate localRedisTemplate;
 
     /**
      * 根据线路id求线路包含的信息，用于返回给客户端
@@ -36,28 +38,26 @@ public class LineServiceImpl implements ILineService {
      */
     @Override
     public Line4User lineId2Line4User(long lineId) {
-        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
+        BoundHashOperations<String, String, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
+        BoundHashOperations<String, String, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         Line4User line4User = new Line4User();
         Order order;
         List<Tour4User> tour4UserList = new ArrayList<>();
         Tour4User tour4User;
-        Set<Long> orderIds = linePool.get(lineId);
+        Set<Long> orderIds = linePool.get(String.valueOf(lineId));
         if(orderIds==null){
             return null;
         }
         for (Long orderId :
                 orderIds) {
-            order = orderPool.get(orderId);
+            order = orderPool.get(String.valueOf(orderId));
             tour4User = new Tour4User(order.getStartLongitude(), order.getStartLatitude(), order.getEndLongitude(), order.getEndLatitude());
             tour4UserList.add(tour4User);
         }
         line4User.setLineId(lineId);
         line4User.setTours(tour4UserList);
         //如果线路人数到达定值则存在车辆信息
-        if (linePool.get(lineId).size() > MIN_PERSON) {
+        if (linePool.get(String.valueOf(lineId)).size() > MIN_PERSON) {
             line4User.setLineStatus(LineStatusEnum.BUS_START.getValue());
             //TODO 设置bus信息
         }

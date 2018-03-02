@@ -16,9 +16,11 @@ import org.springframework.data.geo.*;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.BoundGeoOperations;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,16 +38,13 @@ public class LoginServiceImpl implements ILoginService {
     final static double MIN_DISTANCE=2000d;
     @Autowired
     private ILineService lineService;
-    @Autowired
-    private StringRedisTemplate localRedisTemplate;
+    @Resource(name="redisTemplate")
+    private RedisTemplate localRedisTemplate;
 
     @Override
     public LoginResponse getUserStatusOrRecommend(LoginRequest loginRequest) {
         LoginResponse loginResponse =new LoginResponse();
-        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         User user=userPool.get(loginRequest.getUserId());
         List<Line4User> lines=null;
         if(user==null||user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
@@ -63,9 +62,6 @@ public class LoginServiceImpl implements ILoginService {
      * @return
      */
     List<Line4User> recommend(LoginRequest loginRequest){
-        BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
-        BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         Point point = new Point(loginRequest.getLongitude(), loginRequest.getLatitude());
         Circle within = new Circle(point,new Distance(MIN_DISTANCE));

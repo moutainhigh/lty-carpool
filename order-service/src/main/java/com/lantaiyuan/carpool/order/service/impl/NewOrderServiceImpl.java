@@ -15,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.redis.core.BoundGeoOperations;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -35,8 +37,8 @@ public class NewOrderServiceImpl implements INewOrderService {
     final double MIN_ORDER_SIMILAR=80d;
     @Autowired
     private IOrderService orderService;
-    @Autowired
-    private StringRedisTemplate localRedisTemplate;
+    @Resource(name="redisTemplate")
+    private RedisTemplate localRedisTemplate;
     @Autowired
     PublishChannel publishChannel;
     @Autowired
@@ -90,8 +92,6 @@ public class NewOrderServiceImpl implements INewOrderService {
     private boolean canAdd(Order order) {
         BoundHashOperations<String, Long, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
-        BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
-        BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         long lineId=order.getLineId();
         Set<Long> orderIds = linePool.get(lineId);
         if(orderIds==null){
