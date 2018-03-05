@@ -11,13 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date: 2018/1/26$ 15:51$
  * @description:
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.lantaiyuan.carpool"})
 @Slf4j
 public class WebSocketApplication {
     public static void main(String[] args) {
-        Object[] objects= new Object[2];
-        objects[0] = CommonApplication.class;
-        objects[1] = WebSocketApplication.class;
-        SpringApplication.run(objects, args);
+        SpringApplication.run(WebSocketApplication.class, args);
     }
 }

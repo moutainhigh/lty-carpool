@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.order.config;
+package com.lantaiyuan.carpool.login.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class Swagger2Config {
-    
+public class LoginSwagger2Config {
     @Bean
     public Docket createRestApi()
     {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("orderAPI")
+                .groupName("loginAPI")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lantaiyuan"))
@@ -34,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("订单相关的RESTful APIs")
-                .description("订单相关的RESTful API")
+                .title("login APIs")
+                .description("login API")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

@@ -1,4 +1,4 @@
-package com.lantaiyuan.carpool.login.config;
+package com.lantaiyuan.carpool.match.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class Swagger2Config {
+public class MatchSwagger2Config {
     @Bean
     public Docket createRestApi()
     {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("loginAPI")
+                .groupName("match")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lantaiyuan"))
@@ -33,8 +33,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("login APIs")
-                .description("login API")
+                .title("match APIs")
+                .description("match API")
                 .termsOfServiceUrl("")
                 .version("1.0")
                 .build();

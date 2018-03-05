@@ -15,13 +15,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * @date: 2017/12/27$ 14:03$
  * @description:用户进入
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.lantaiyuan.carpool")
 @Slf4j
 public class LoginApplication {
     public static void main(String[] args) {
-        Object[] objects= new Object[2];
-        objects[0] = CommonApplication.class;
-        objects[1] = LoginApplication.class;
-        SpringApplication.run(objects, args);
+        SpringApplication.run(LoginApplication.class, args);
     }
 }

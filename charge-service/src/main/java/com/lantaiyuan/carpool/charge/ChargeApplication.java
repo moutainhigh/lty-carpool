@@ -12,13 +12,10 @@ import org.springframework.context.ApplicationContext;
  * @date: 2017/12/27$ 14:03$
  * @description:计费
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.lantaiyuan.carpool")
 @Slf4j
 public class ChargeApplication {
     public static void main(String[] args) {
-        Object[] objects= new Object[2];
-        objects[0] = CommonApplication.class;
-        objects[1] = ChargeApplication.class;
-        SpringApplication.run(objects, args);
+        SpringApplication.run(ChargeApplication.class, args);
     }
 }

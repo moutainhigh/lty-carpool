@@ -17,13 +17,10 @@ import org.springframework.context.ApplicationContext;
 @EnableBinding({
         MatchSubscribeChannel.class
 })
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.lantaiyuan.carpool")
 @Slf4j
 public class MatchApplication {
     public static void main(String[] args) {
-        Object[] objects= new Object[2];
-        objects[0] = CommonApplication.class;
-        objects[1] = MatchApplication.class;
-        SpringApplication.run(objects, args);
+        SpringApplication.run(MatchApplication.class, args);
     }
 }
