@@ -49,7 +49,7 @@ public class LoginServiceImpl implements ILoginService {
         List<Line4User> lines=null;
         if(user==null||user.getUserStatus().equals( UserStatusEnum.NO_STATUS.getValue())){
              lines = recommend(loginRequest);
-        }else if(user.getUserStatus().equals( UserStatusEnum.MATCH_STATUS.getValue())){
+        }else if(user.getUserStatus().equals( UserStatusEnum.MATCH.getValue())){
              lines = getLine(user);
         }
         loginResponse.setLines(lines);

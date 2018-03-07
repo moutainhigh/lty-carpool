@@ -10,7 +10,7 @@ import com.lantaiyuan.carpool.common.domain.Order;
  */
 public interface IOrderService {
     /**
-     * 订单相似度计算，最大100分
+     * 订单相似度计算，最大pi*100
      * @param order0
      * @param order1
      * @return

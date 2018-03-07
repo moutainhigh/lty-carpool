@@ -13,7 +13,13 @@ import java.io.Serializable;
  */
 @Data
 public class WebSocketResponse implements Validate,Serializable {
+    /**
+     * 用户状态
+     */
     Integer status;
+    /**
+     * 用户所在线路信息
+     */
     Line4User line;
 
     public WebSocketResponse(int status, Line4User line) {

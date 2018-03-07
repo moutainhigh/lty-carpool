@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  */
 public interface IChargeService {
     /**
-     * 计费
+     * 根据请求参数计算需要的费用
      * @param chargeRequest
      * @return
      */

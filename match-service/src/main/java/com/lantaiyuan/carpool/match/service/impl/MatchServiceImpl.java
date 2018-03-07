@@ -46,15 +46,21 @@ public class MatchServiceImpl implements IMatchService {
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
+        //从缓存中查询用户信息
         User user= userPool.get(cancelRequest.getUserId());
         long lineId=user.getLineId();
         long orderId=user.getOrderId();
+        //从线路缓存池中删除订单
         linePool.get(lineId).remove(orderId);
+        //如果线路已空则删除线路信息
         if(linePool.get(lineId).size()==0){
             linePool.delete(lineId);
         }
+        //从订单池中删除订单
         orderPool.delete(orderId);
+        //行程池删除行程
         tourPool.geoRemove(""+orderId+"-"+lineId);
+        //用户池删除用户
         userPool.delete(user.getUserId());
     }
 
@@ -64,10 +70,12 @@ public class MatchServiceImpl implements IMatchService {
      */
     @Override
     public void matchOrder(Order order) {
+        //获取线路缓存池
+        BoundHashOperations<String, String, Set<Long>> linePool = localRedisTemplate.boundHashOps(RedisPoolKey.linePoolKey);
         BoundHashOperations<String, Long, Order>   orderPool = localRedisTemplate.boundHashOps(RedisPoolKey.orderPoolKey);
         BoundHashOperations<String, String, User> userPool = localRedisTemplate.boundHashOps(RedisPoolKey.userPoolKey);
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
-        //获取起始点
+        //获取订单起始点
         Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
         Long orderId=order.getOrderId();
         Long lineId;
@@ -84,18 +92,21 @@ public class MatchServiceImpl implements IMatchService {
         }
         //有线路id，说明是加入某条线路
         else {
-            //将订单id添加到线路缓存
+            //获取线路id
             lineId = order.getLineId();
         }
-        //保存该订单到缓存
+        //保存该订单到定单缓存
         orderPool.put(order.getOrderId(), order);
-        //为行程指定id并缓存
+        //为行程指定id并缓存到行程池
         tourPool.geoAdd(point, ""+orderId+"-"+lineId);
+        //将订单id加入线路缓存
+        linePool.get(lineId).add(orderId);
+        //缓存用户信息
         User user= new User();
         user.setUserId(order.getUserId());
         user.setLineId(lineId);
         user.setOrderId(orderId);
-        user.setUserStatus(UserStatusEnum.MATCH_STATUS.getValue());
+        user.setUserStatus(UserStatusEnum.MATCH.getValue());
         userPool.put(user.getUserId(),user);
     }
 
@@ -111,11 +122,16 @@ public class MatchServiceImpl implements IMatchService {
         BoundGeoOperations<String, String> tourPool = localRedisTemplate.boundGeoOps(RedisPoolKey.tourPoolKey);
         double maxSimilarity=0;
         long similarOrderId=0L;
-        //获取附近行程
+        //获取订单起点
         Point point = new Point(order.getStartLongitude(), order.getStartLatitude());
+        //指定周边范围
         Circle within = new Circle(point,new Distance(100));
+        //获取附近行程
         GeoResults<RedisGeoCommands.GeoLocation<String>> results = tourPool.geoRadius(within);
         Iterator<GeoResult<RedisGeoCommands.GeoLocation<String>>> it = results.iterator();
+        /**
+         * 求周边最大相似度订单
+         */
         while (it.hasNext()){
             Long orderId=Long.parseLong(it.next().getContent().getName().split("-")[0]);
             double similarity=orderService.similarity(order,orderPool.get(orderId));

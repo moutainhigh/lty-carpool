@@ -9,13 +9,13 @@ import com.lantaiyuan.carpool.common.domain.request.CancelRequest;
  */
 public interface IMatchService {
     /**
-     * 撮合
+     * 取消撮合
      * @param cancelRequest
      */
     void matchCancel(CancelRequest cancelRequest);
 
     /**
-     *
+     *撮合订单
      * @param order
      */
     void matchOrder(Order order);

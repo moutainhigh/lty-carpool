@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author: Administrator$
  * @project: lty-carpool$
  * @date: 2018/2/5$ 10:20$
- * @description:
+ * @description: 订单相关服务
  */
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -17,15 +17,20 @@ public class OrderServiceImpl implements IOrderService {
      * 求两个订单的相似度
      * @param order0
      * @param order1
-     * @return
+     * @return 相似度的值
      */
     @Override
     public double similarity(Order order0, Order order1) {
+        /**
+         * 从订单中提取起始点，终点
+         */
         Point startPoint0=new Point(order0.getStartLongitude(),order0.getStartLatitude());
         Point endPoint0=new Point(order0.getEndLongitude(),order0.getEndLatitude());
         Point startPoint1=new Point(order1.getStartLongitude(),order1.getStartLatitude());
         Point endPoint1=new Point(order1.getEndLongitude(),order1.getEndLatitude());
+        //求订单0的斜率
         double slope0 = getSlope(startPoint0,endPoint0);
+        //求订单1的斜率
         double slope1=getSlope(startPoint1,endPoint1);
         //求弧度tan值，正负无穷
         double tanA=(slope1-slope0)/(1+slope1*slope0);
@@ -37,7 +42,7 @@ public class OrderServiceImpl implements IOrderService {
      * 求直线斜率
      * @param point0
      * @param point1
-     * @return
+     * @return 斜率值
      */
      double getSlope(Point point0,Point point1){
         if(point1.getX()==point0.getX()){

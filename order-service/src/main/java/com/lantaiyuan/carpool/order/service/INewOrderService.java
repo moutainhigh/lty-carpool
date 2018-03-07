@@ -6,7 +6,7 @@ import com.lantaiyuan.carpool.common.domain.request.NewOrderRequest;
  * @author: Administrator$
  * @project: lty-carpool$
  * @date: 2018/1/11$ 9:50$
- * @description:
+ * @description:新订单实现
  */
 public interface INewOrderService {
     /**

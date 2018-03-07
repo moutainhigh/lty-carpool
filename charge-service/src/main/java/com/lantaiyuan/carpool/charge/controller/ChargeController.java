@@ -26,11 +26,13 @@ public class ChargeController {
     private IChargeService chargeService;
     @RequestMapping(value = "/charge", method = RequestMethod.POST)
     public ResultObject charge(@RequestBody ChargeRequest chargeRequest) {
+        //检验客户端传来的参数
         if(!chargeRequest.validate()){
             ResultObject rs = new ResultObject(ResultCodeEnum.INVALIDATE_PARAM.getValue());
             rs.setMassage("请检查参数");
             return rs;
         }
+        //根据行程请求计算费用
         BigDecimal r = chargeService.charge(chargeRequest);
         ResultObject ret = new ResultObject(ResultCodeEnum.SUCCESS.getValue(), r);
         return ret;

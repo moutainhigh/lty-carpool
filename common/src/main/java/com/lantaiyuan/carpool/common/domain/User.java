@@ -12,17 +12,29 @@ import java.io.Serializable;
  * @author: Administrator$
  * @project: lty-carpool$
  * @date: 2018/1/8$ 9:53$
- * @description:
+ * @description: 数据库用户信息
  */
 @Table(name="carpool_user")
 @Entity
 @Data
 @NoArgsConstructor
 public class User implements Validate,Serializable {
+    /**
+     * 用户id
+     */
     @Id
     private  String userId;
+    /**
+     * 用户状态 com.lantaiyuan.carpool.common.constant.UserStatusEnum
+     */
     private  Integer userStatus;
+    /**
+     * 订单id
+     */
     private Long orderId;
+    /**
+     * 线路id
+     */
     private Long lineId;
 
 

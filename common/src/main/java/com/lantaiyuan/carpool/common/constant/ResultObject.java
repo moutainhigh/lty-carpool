@@ -4,7 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *
+ * @author: Administrator$
+ * @project: lty-carpool$
+ * @date: 2018/1/9$ 15:39$
+ * @description:返回客户端数据包装
  */
 @Data
 @NoArgsConstructor
